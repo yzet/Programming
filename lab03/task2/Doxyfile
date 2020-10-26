@@ -1,5 +1,5 @@
 ## Common Project info
-PROJECT_NAME = "Лабороторна 3. Завдання 1"
+PROJECT_NAME = "Лабороторна 3. Завдання 2"
 PROJECT_BRIEF = "Демонстрація документування коду засобами `doxygen`"
 PROJECT_NUMBER = 0.1
 
