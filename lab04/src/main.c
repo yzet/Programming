@@ -24,7 +24,7 @@ int main(){
     // end task 1
     // task 2
     // take difference of fractional and intenger parts
-    #define NUMBER 123.656f
+    #define NUMBER 123.655f
 
     int intenger_part_of_number = (int)NUMBER;
     double fractional_part_of_number = (NUMBER - intenger_part_of_number) * 1000.0;
@@ -43,8 +43,7 @@ int main(){
     int n = 6;
     int buff = 0;
 
-    if ((m > k) && (m < n)){} // if result ready on input parameters
-    else
+    if (!((m > k) && (m < n))) // if result ready on input parameters
     {
         if (k > m && k > n){
             buff = n;
