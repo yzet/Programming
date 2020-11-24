@@ -59,7 +59,7 @@ int  get_indicator_of_order_in_sequence(int  count_of_elements, ...)
 
 ### 3.1 Отримані результати
 Результат роботи програми при значенні *COUNT_OF_ELEMENTS_IN_SEQUENCE* == 5 і ряді чисел 4, 1, 6, 3, 2 продемонстрований на рис. 1.
-![рис. 1](https://drive.google.com/uc?export=view&id=1kbZ4czRBc5dIhVdD34LYtHQoXK1xX-Q8)
+![рис. 1](https://github.com/yzet/Programming/blob/main/assets/lab07/%D0%BA1.png?raw=true)
 
 ## Висновки
 У результаті виконання лабораторної роботи отримали навички використання функцій із стійкою і змінною кількістю параметрів.
