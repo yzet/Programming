@@ -31,14 +31,16 @@ int get_count_of_words(char string[], int string_length);
 
 //
 void fill_squere_array_with_int(size_t array_size, int array[array_size][array_size], int minimal_limit, int maximal_limit);
-void round_move_elements_left(size_t array_size, int array[array_size][array_size], int step);
+void round_move_elements_left(size_t array_size, int array[array_size][array_size], int buffer_array[array_size][array_size], int step);
 
 //
-void set_matrix_in_squere(size_t matrix_size, int matrix[matrix_size][matrix_size]);
+void set_matrix_in_squere(size_t matrix_size, int matrix[matrix_size][matrix_size], int buffer_matrix[matrix_size][matrix_size]);
 
 //
 void get_number_in_string(int number, char number_in_string[]);
 void fill_string_with_spaces(int string_size, char string[]);
+
+void copy_squre_array_to_squere_array(size_t array_size, int from[array_size][array_size], int to[array_size][array_size]);
 
 int main()
 {
@@ -84,16 +86,18 @@ int main()
 
     // task 5. round move elements of matrix line from right to left
     int squre_array[ARRAY_SIZE][ARRAY_SIZE];
+    int buffer_squre_array[ARRAY_SIZE][ARRAY_SIZE];
     const int MINIMAL_VALUE_OF_ELEMENT = 0;
     const int MAXIMAL_VALUE_OF_ELEMENT = 9;
     fill_squere_array_with_int(ARRAY_SIZE, squre_array, MINIMAL_VALUE_OF_ELEMENT, MAXIMAL_VALUE_OF_ELEMENT + 1);
-    round_move_elements_left(ARRAY_SIZE, squre_array, 1);
+    round_move_elements_left(ARRAY_SIZE, squre_array, buffer_squre_array, 1);
     // end task 5. round move elements of matrix line from right to left
 
     // task 6. multiply matrix with size matrix_size on itself
     int matrix[ARRAY_SIZE][ARRAY_SIZE];
+    int buffer_matrix[ARRAY_SIZE][ARRAY_SIZE];
     fill_squere_array_with_int(ARRAY_SIZE, matrix, MINIMAL_VALUE_OF_ELEMENT, MAXIMAL_VALUE_OF_ELEMENT + 1);
-    set_matrix_in_squere(ARRAY_SIZE, matrix);
+    set_matrix_in_squere(ARRAY_SIZE, matrix, buffer_matrix);
     // end task 6
 
     return 0;
@@ -347,13 +351,10 @@ void fill_squere_array_with_int(size_t array_size, int array[array_size][array_s
     }
 }
 
-void round_move_elements_left(size_t array_size, int array[array_size][array_size], int step)
+void round_move_elements_left(size_t array_size, int array[array_size][array_size], int buffer_array[array_size][array_size], int step)
 {
     if (array_size > 1)
     {
-
-        int *result_array;
-        result_array = (int *)malloc(array_size * array_size * sizeof(int));
         int new_index_of_column = 0;
 
         for (int column_index = 0; column_index < array_size; column_index++)
@@ -372,26 +373,16 @@ void round_move_elements_left(size_t array_size, int array[array_size][array_siz
 
             for (int line_index = 0; line_index < array_size; line_index++)
             {
-
-                *(result_array + line_index * array_size + new_index_of_column) = array[line_index][column_index];
+                buffer_array[line_index][new_index_of_column] = array[line_index][column_index];
             }
         }
-        for (int line_index = 0; line_index < array_size; line_index++)
-        {
-            for (int column_index = 0; column_index < array_size; column_index++)
-            {
-
-                array[line_index][column_index] = *(result_array + line_index * array_size + column_index);
-            }
-        }
-        free(result_array);
+        
+        copy_squre_array_to_squere_array(array_size, buffer_array, array); 
     }
 }
 
-void set_matrix_in_squere(size_t matrix_size, int matrix[matrix_size][matrix_size])
+void set_matrix_in_squere(size_t matrix_size, int matrix[matrix_size][matrix_size], int buffer_matrix[matrix_size][matrix_size])
 {
-    int *result;
-    result = (int *)malloc(matrix_size * matrix_size * sizeof(int));
     int left_matrix_column = 0, right_matrix_line = 0;
     int sum_buffer = 0;
     for (int left_matrix_line = 0; left_matrix_line < matrix_size; left_matrix_line++)
@@ -405,18 +396,19 @@ void set_matrix_in_squere(size_t matrix_size, int matrix[matrix_size][matrix_siz
 
                 sum_buffer += matrix[left_matrix_line][changing_index] * matrix[changing_index][right_matrix_column];
             }
-            *(result + left_matrix_line * matrix_size + right_matrix_column) = sum_buffer;
+            buffer_matrix[left_matrix_line][right_matrix_column] = sum_buffer;
             sum_buffer = 0;
         }
     }
-    for (int line_index = 0; line_index < matrix_size; line_index++)
-    {
-        for (int column_index = 0; column_index < matrix_size; column_index++)
-        {
+    copy_squre_array_to_squere_array(matrix_size, buffer_matrix, matrix); 
 
-            matrix[line_index][column_index] = *(result + line_index * matrix_size + column_index);
-        }
-    }
-    free(result);
 }
 
+void copy_squre_array_to_squere_array(size_t array_size, int from[array_size][array_size], int to[array_size][array_size])
+{
+    for (int i = 0; i < array_size; i++){
+        for (int j = 0; j < array_size; j++){
+            to[i][j] = from[i][j];
+        }
+    }
+}
