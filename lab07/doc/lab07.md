@@ -105,11 +105,13 @@ if (va_arg(factor, int) < va_arg(factor, int))
 Крок 1 (див. рис. 3). Знаходячись в основній процедурі, досліджуємо стан змінних, в тому числі констант.
 
 ![](https://github.com/yzet/Programming/blob/main/lab07/doc/assets/%D0%BA3.png?raw=true) 
+
 Рисунок 3 — значення змінних при запуску програми
 
 Крок 2 (див. рис. 4). Дослідження стану змінних наприкінці виконання функції визначення показника порядку послідовності чисел.
 
-![](https://github.com/yzet/Programming/blob/main/lab07/doc/assets/%D0%BA4.png?raw=true) 
+![](https://github.com/yzet/Programming/blob/main/lab07/doc/assets/%D0%BA4.png?raw=true)
+Рисунок 4 — значення порядку послідовності
 
 ## Висновки
 
