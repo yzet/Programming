@@ -96,6 +96,7 @@ if (va_arg(factor, int) < va_arg(factor, int))
 
 Крок 1 (див. рис. 3). Знаходячись в основній процедурі, досліджуємо стан змінних, в тому числі констант.
 
+<<<<<<< HEAD
 ![](file:///C:/Users/zyzy9/AppData/Local/Temp/lu23608nfu60.tmp/lu23608nfu7t_tmp_9ded7bfcc1061695.png) 
 Рисунок 3 — значення змінних при запуску програми
 
@@ -103,6 +104,11 @@ if (va_arg(factor, int) < va_arg(factor, int))
 
 ![](file:///C:/Users/zyzy9/AppData/Local/Temp/lu23608nfu60.tmp/lu23608nfu7t_tmp_ccbd09a7b41d9015.png) 
 Рисунок 4 — значення порядку послідовності
+=======
+### 3.1 Отримані результати
+Результат роботи програми при значенні *COUNT_OF_ELEMENTS_IN_SEQUENCE* == 5 і ряді чисел 4, 1, 6, 3, 2 продемонстрований на рис. 1.
+![рис. 1](https://github.com/yzet/Programming/blob/main/assets/lab07/%D0%BA1.png?raw=true)
+>>>>>>> 0b79f0d435ca33053991c9712608d435f831c223
 
 ## Висновки
 
