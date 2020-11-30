@@ -12,6 +12,9 @@ prep:
 
 compile: create_bins
 
+touch:
+	doxygen Doxyfile
+
 create_bins: main_lab_5.bin main_lab_6.bin main.bin
 	
 main_lab_5.bin: src/main_lab_5.c

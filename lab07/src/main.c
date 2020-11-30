@@ -1,7 +1,33 @@
+/**
+ * @mainpage
+ * # Загальне завдання
+ * 1. Generate a function that determines the indicator of the order 
+ * in sequence of numbers
+ *
+ * @author Zhuravlev Y.
+ * @date 30-nov-2020
+ * @version 0.1
+ */
+
+/**
+ * @file main.c
+ * @brief Demo file of the get_indicator_of_order_in_sequence function
+ * @author Zhuravlev Y.
+ * @date 14-nov-2020
+ * @version 0.1
+ */
+
 #include <stdarg.h>
 
 int get_indicator_of_order_in_sequence(int count_of_elements, ...);
 
+/**
+ * Main function.
+ * Sequencing:
+ * - determine count of elements in sequence
+ * - determine indicator of order by get_indicator_of_order_in_sequence function call
+ * @return successfull code returns (0)
+ */
 int main()
 {
     #define COUNT_OF_ELEMENTS_IN_SEQUENCE 5
@@ -11,6 +37,13 @@ int main()
     return 0;
 }
 
+/**
+ * Determine indicator of order in secuence
+ *
+ * @param count_of_elements count of elements in sequence
+ * @param args sequence of numbers
+ * @return indicator of order
+ */
 int get_indicator_of_order_in_sequence(int count_of_elements, ...)
 {
     int indicator_of_order = 0;
