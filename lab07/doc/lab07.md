@@ -44,7 +44,7 @@ _Опис роботи_: функція перевіряє кожен елеме
 
 _Повертає функція_ показник порядку ряду чисел.
 
-![](file:///C:/Users/zyzy9/AppData/Local/Temp/lu23608nfu60.tmp/lu23608nfu7t_tmp_3c2d0e0190b6dceb.png)  
+![](https://github.com/yzet/Programming/blob/main/lab07/doc/assets/get_indicator_of_order_diagram.png?raw=true)  
   
 Рисунок 1 — Схема алгоритму функції _get_indicator_of_order_in_sequence_
 
@@ -60,7 +60,7 @@ _Опис роботи:_ задається кількість елементі�
 
 _Повертає функція_ код повернення програми (0).
 
-![](file:///C:/Users/zyzy9/AppData/Local/Temp/lu23608nfu60.tmp/lu23608nfu7t_tmp_f27e987cb5b25552.png)  
+![](https://github.com/yzet/Programming/blob/main/lab07/doc/assets/main_lab07_diagram.png?raw=true)  
 
 Рисунок 2 — Схема алгоритму функції main
 
@@ -104,12 +104,12 @@ if (va_arg(factor, int) < va_arg(factor, int))
 
 Крок 1 (див. рис. 3). Знаходячись в основній процедурі, досліджуємо стан змінних, в тому числі констант.
 
-![](file:///C:/Users/zyzy9/AppData/Local/Temp/lu23608nfu60.tmp/lu23608nfu7t_tmp_9ded7bfcc1061695.png) 
+![](https://github.com/yzet/Programming/blob/main/lab07/doc/assets/%D0%BA3.png?raw=true) 
 Рисунок 3 — значення змінних при запуску програми
 
 Крок 2 (див. рис. 4). Дослідження стану змінних наприкінці виконання функції визначення показника порядку послідовності чисел.
 
-![](file:///C:/Users/zyzy9/AppData/Local/Temp/lu23608nfu60.tmp/lu23608nfu7t_tmp_ccbd09a7b41d9015.png) 
+![](https://github.com/yzet/Programming/blob/main/lab07/doc/assets/%D0%BA4.png?raw=true) 
 
 ## Висновки
 
