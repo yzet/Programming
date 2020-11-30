@@ -111,6 +111,7 @@ if (va_arg(factor, int) < va_arg(factor, int))
 Крок 2 (див. рис. 4). Дослідження стану змінних наприкінці виконання функції визначення показника порядку послідовності чисел.
 
 ![](https://github.com/yzet/Programming/blob/main/lab07/doc/assets/%D0%BA4.png?raw=true)
+
 Рисунок 4 — значення порядку послідовності
 
 ## Висновки
