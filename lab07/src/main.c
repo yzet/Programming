@@ -1,6 +1,6 @@
 /**
  * @mainpage
- * # Загальне завдання
+ * # General task
  * 1. Generate a function that determines the indicator of the order 
  * in sequence of numbers
  *
