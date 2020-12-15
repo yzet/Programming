@@ -42,7 +42,7 @@ _Опис роботи_: за допомогою функції *symbol_is_digit
 
 _Повертає функція_ кількість чисел у тексті.
 
-![](file:///C:/Users/zyzy9/AppData/Local/Temp/lu23608nfu60.tmp/lu23608nfu7t_tmp_3c2d0e0190b6dceb.png)  
+![](https://github.com/yzet/Programming/blob/main/lab13/doc/assets/count_of_numbers.png?raw=true)  
   
 Рисунок 1 — Схема алгоритму функції *get_count_of_numbers_in_text*
 ##### Функція перевірки символу
@@ -55,7 +55,7 @@ _Схема алгоритму функції_ подана на рис. 2.
 _Опис роботи_: функція перевіряє ASCII символу, і якщо цей код - код цифри, повертає істину, інакше - брехню.
 
 _Повертає функція_ true або false.
-![](file:///C:/Users/zyzy9/AppData/Local/Temp/lu23608nfu60.tmp/lu23608nfu7t_tmp_3c2d0e0190b6dceb.png) 
+![](https://github.com/yzet/Programming/blob/main/lab13/doc/assets/symbol_is_digit.png?raw=true) 
 
 Рисунок 2 — Схема алгоритму функції *symbol_is_digit*
 
@@ -69,7 +69,7 @@ _Схема алгоритму функції_ подана на рис. 3.
 _Опис роботи_:  за допомогою функції *symbol_is_digit* функція перевіряє чи є символ цифрою, якщо це цифра, то до тимчасової змінної додається цей символ, якщо ні тимчасова змінна за допомогою функції *atoi* перетворюється у ціле число, яке записується у масив чисел.
 
 _Повертає функція_ змінений масив з числами.
-![](file:///C:/Users/zyzy9/AppData/Local/Temp/lu23608nfu60.tmp/lu23608nfu7t_tmp_3c2d0e0190b6dceb.png) 
+![](https://github.com/yzet/Programming/blob/main/lab13/doc/assets/get_numbers_in_text.png?raw=true) 
 
 Рисунок 3 — Схема алгоритму функції *get_numbers_in_text*
 
@@ -84,7 +84,7 @@ _Схема алгоритму функції_ подана на рис. 4.
 _Опис роботи:_ функція записує у змінну *text* строку, визначає кількість чисел у цьому тексті, створює масив для збереження чисел, записує усі числа у масив.
 _Повертає функція_ код повернення програми (0).
 
-![](file:///C:/Users/zyzy9/AppData/Local/Temp/lu23608nfu60.tmp/lu23608nfu7t_tmp_f27e987cb5b25552.png)  
+![](https://github.com/yzet/Programming/blob/main/lab13/doc/assets/main.png?raw=true)  
 
 Рисунок 4 — Схема алгоритму функції main
 
@@ -128,17 +128,17 @@ buffer[++last_index_in_buffer] = '\0';
 
 Крок 1 (див. рис. 5). Знаходячись в основній процедурі, досліджуємо стан змінних, в тому числі констант.
 
-![](file:///C:/Users/zyzy9/AppData/Local/Temp/lu23608nfu60.tmp/lu23608nfu7t_tmp_9ded7bfcc1061695.png) 
+![](https://github.com/yzet/Programming/blob/main/lab13/doc/assets/img5.png?raw=true) 
 Рисунок 5 — значення змінних при запуску програми.
 
 Крок 2 (див. рис. 6). Дослідження стану змінних наприкінці виконання функції визначення кількості чисел у тексті.
 
-![](file:///C:/Users/zyzy9/AppData/Local/Temp/lu23608nfu60.tmp/lu23608nfu7t_tmp_ccbd09a7b41d9015.png) 
+![](https://github.com/yzet/Programming/blob/main/lab13/doc/assets/img6.png?raw=true) 
 Рисунок 6 — значення змінних після визначення кількості чисел у тексті. 
 
 Крок 3 (див. рис. 7). Дослідження стану змінних після виконання функції запису чисел до масиву із числами.
 
-![](file:///C:/Users/zyzy9/AppData/Local/Temp/lu23608nfu60.tmp/lu23608nfu7t_tmp_ccbd09a7b41d9015.png) 
+![](https://github.com/yzet/Programming/blob/main/lab13/doc/assets/img7.png?raw=true) 
 Рисунок 7 - значення змінних після запису чисел у масив
 
 ## Висновки
