@@ -104,7 +104,7 @@ void fill_two_dimensional_array_with_random_number(size_t x_size, size_t y_size,
 
 void fill_array_with_main_diagonal_elements_of_square_array(size_t side_size, int square_array[side_size][side_size], int main_diagonal_array[side_size])
 {
-    for (int i = 0; i < side_size; i++)
+    for (size_t i = 0; i < side_size; i++)
     {
         main_diagonal_array[i] = square_array[i][i];
     }
@@ -113,9 +113,9 @@ void fill_array_with_main_diagonal_elements_of_square_array(size_t side_size, in
 void buble_sort(size_t array_size, int array[])
 {
 
-    for (int i = 0; i < array_size; i++)
+    for (size_t i = 0; i < array_size; i++)
     {
-        for (int j = 0; j < array_size - 1; j++)
+        for (size_t j = 0; j < array_size - 1; j++)
         {
             if (array[j] > array[j + 1])
             {

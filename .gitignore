@@ -35,4 +35,9 @@ lab11/src/main1.c
 lab11/src/main2.c
 lab11/src/main3.c
 
+lab13/dist/*
+lab13/src/main1.c
+lab13/src/main2.c
+lab13/src/main3.c
+
 *Zone.Identifier
