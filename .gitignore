@@ -41,7 +41,8 @@ lab13/src/main2.c
 lab13/src/main3.c
 
 lab12/dist/*
-lab14/*
+
+lab14/dist/*
 lab14/input.txt
 lab14/output.txt
 
