@@ -119,14 +119,49 @@ void set_agencies(struct LegalAgency ***legal_agencies, struct MarriageAgency **
     *legal_agencies = (struct LegalAgency **)calloc(legal_agencies_number, sizeof(struct LegalAgency *));
     *marriage_agencies = (struct MarriageAgency **)calloc(marriage_agencies_number, sizeof(struct MarriageAgency *));
 
-    size_t * legal_agency_indices = (size_t *)malloc(legal_agencies_number);
-    size_t * marriage_agency_indices = (size_t *)malloc(marriage_agencies_number);
+    size_t *legal_agency_indices = (size_t *)malloc(legal_agencies_number * sizeof(size_t));
+    size_t *marriage_agency_indices = (size_t *)malloc(marriage_agencies_number * sizeof(size_t));
 
     set_indices_of_agency_from_agensies_info_by_type(Legal, legal_agency_indices, agensies_info, count_of_agencies);
     set_indices_of_agency_from_agensies_info_by_type(Marriage, marriage_agency_indices, agensies_info, count_of_agencies);
 
-    
-    
+    const size_t agency_type_index = 7;
+    size_t legal_agency_index = 0;
+    size_t marriage_agency_index = 0;
+    for (size_t agency_index = 0; agency_index < count_of_agencies; agency_index++)
+    {
+        char **agency_info = (char **)calloc(0, sizeof(char *));
+        size_t numbers_of_characteristics = set_agency_info(&agency_info, agensies_info, agency_index);
+
+        struct Person director;
+        set_person(&director, *(agency_info + SurnameField), *(agency_info + NameField), *(agency_info + EmailField));
+        struct Agency agency;
+        bool is_weekends = false;
+        if (strtol(*(agency_info + IsWeekendsField), NULL, 10) == 1)
+            is_weekends = true;
+        set_agency(&agency, is_weekends, *(agency_info + AgencyNameField), (size_t)strtol(*(agency_info + YearsOnMarketField), NULL, 10), director, (unsigned int)strtol(*(agency_info + CityField), NULL, 10));
+
+        if (strtol(*(agency_info + agency_type_index), NULL, 10) == Legal)
+        {
+            // struct Person director;
+            // set_person(&director, *(agency_info + SurnameField), *(agency_info + NameField), *(agency_info + EmailField));
+            // struct Agency agency;
+            // bool is_weekends = false;
+            // if (strtol(*(agency_info + IsWeekendsField), NULL, 10) == 1)
+            //     is_weekends = true;
+            // set_agency(&agency, is_weekends, *(agency_info + AgencyNameField), (size_t)strtol(*(agency_info + YearsOnMarketField), NULL, 10), director, (unsigned int)strtol(*(agency_info + CityField), NULL, 10));
+            struct LegalAgency legal_agency;
+            *((*legal_agencies) + legal_agency_index) = &legal_agency;
+            set_legal_agency(*((*legal_agencies) + legal_agency_index), agency, (unsigned int)strtol(*(agency_info + ServiceTypeField), NULL, 10), (size_t)strtol(*(agency_info + NumberOfSuccesFeesField), NULL, 10));
+            legal_agency_index++;
+        }
+        else if (strtol(*(agency_info + agency_type_index), NULL, 10) == Marriage)
+        {
+            // struct MarriageAgency marriage_agency;
+            // *((*marriage_agencies) + marriage_agency_index) = &marriage_agency;
+            
+        }
+    }
 }
 
 size_t get_number_of_agencies_by_type(enum AgencyTypes agency_type, char **agenﾑ（es_info, size_t count_of_agencies)
@@ -137,9 +172,9 @@ size_t get_number_of_agencies_by_type(enum AgencyTypes agency_type, char **agenﾑ
 
     for (size_t agency_index = 0; agency_index < count_of_agencies; agency_index++)
     {
-        char ** agency_info = (char **)calloc(0, sizeof(char *));
+        char **agency_info = (char **)calloc(0, sizeof(char *));
         size_t count_of_fields = split(&agency_info, *(agenﾑ（es_info + agency_index), " ");
-        if (strtol( *(agency_info + agency_type_index), NULL, 10) == agency_type)
+        if (strtol(*(agency_info + agency_type_index), NULL, 10) == agency_type)
         {
             number_of_agencies_by_type++;
         }
@@ -153,16 +188,16 @@ size_t get_number_of_agencies_by_type(enum AgencyTypes agency_type, char **agenﾑ
     return number_of_agencies_by_type;
 }
 
-void set_indices_of_agency_from_agensies_info_by_type(enum AgencyTypes agency_type, size_t * indices, char **agenﾑ（es_info, size_t count_of_agencies)
+void set_indices_of_agency_from_agensies_info_by_type(enum AgencyTypes agency_type, size_t *indices, char **agenﾑ（es_info, size_t count_of_agencies)
 {
     const size_t agency_type_index = 7;
     size_t indices_index = 0;
 
     for (size_t agency_index = 0; agency_index < count_of_agencies; agency_index++)
     {
-        char ** agency_info = (char **)calloc(0, sizeof(char *));
+        char **agency_info = (char **)calloc(0, sizeof(char *));
         size_t count_of_fields = split(&agency_info, *(agenﾑ（es_info + agency_index), " ");
-        if (strtol( *(agency_info + agency_type_index), NULL, 10) == agency_type)
+        if (strtol(*(agency_info + agency_type_index), NULL, 10) == agency_type)
         {
             *(indices + indices_index) = agency_index;
         }
@@ -174,3 +209,7 @@ void set_indices_of_agency_from_agensies_info_by_type(enum AgencyTypes agency_ty
     }
 }
 
+size_t set_agency_info(char ***agency_info, char **agencies_info, size_t agency_info_index)
+{
+    return split(agency_info, *(agencies_info + agency_info_index), " ");
+}

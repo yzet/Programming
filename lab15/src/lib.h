@@ -73,6 +73,22 @@ struct MarriageAgency
     size_t countryies;
 };
 
+enum AgencyInfoFields
+{
+    SurnameField,
+    NameField,
+    EmailField,
+    IsWeekendsField,
+    AgencyNameField,
+    YearsOnMarketField,
+    CityField,
+    AgencyTypeField,
+    ServiceTypeField,
+    NumberOfSuccesFeesField,
+    CountOfCountriesField = 9,
+    CountriesFirstField
+};
+
 void set_person(struct Person *person, char *surname, char *name, char *email);
 
 void set_agency(struct Agency *agency, bool is_weakends, char *agency_name, size_t years_on_market, struct Person agency_director, enum Cities city);
@@ -92,5 +108,7 @@ void set_agencies(struct LegalAgency ***legal_agencies, struct MarriageAgency **
 size_t get_number_of_agencies_by_type(enum AgencyTypes agency_type, char **agenсies_info, size_t count_of_agencies);
 
 void set_indices_of_agency_from_agensies_info_by_type(enum AgencyTypes agency_type, size_t * indices, char **agenсies_info, size_t count_of_agencies);
+
+size_t set_agency_info(char *** agency_info, char ** agencies_info, size_t agency_info_index);
 
 #endif
