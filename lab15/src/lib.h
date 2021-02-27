@@ -7,12 +7,13 @@
 #include <string.h>
 
 #define STRING_SIZE 256
+#define N 9
 
 struct Person
 {
-    char *surname;
-    char *name;
-    char *email;
+    char surname[STRING_SIZE];
+    char name[STRING_SIZE];
+    char email[STRING_SIZE];
 };
 
 enum Cities
@@ -26,7 +27,7 @@ enum Cities
 struct Agency
 {
     bool is_weekends;
-    char *name;
+    char name[STRING_SIZE];
     size_t years_on_market;
     struct Person director;
     enum Cities city;
@@ -59,18 +60,19 @@ enum MarriageAgencyServicesTypes
     NumberOfMarriageAgencyServices
 };
 
-enum MarriageAgencyCountryies
+enum MarriageAgencyCountries
 {
     Ukraine = 1,
     Poland = 2,
-    Romania = 4
+    Romania = 4,
+    MaxBitMaskOfCountries = Ukraine + Poland + Romania 
 };
 
 struct MarriageAgency
 {
     struct Agency main_info;
     enum MarriageAgencyServicesTypes service_type;
-    size_t countryies;
+    size_t countries;
 };
 
 enum AgencyInfoFields
@@ -85,8 +87,7 @@ enum AgencyInfoFields
     AgencyTypeField,
     ServiceTypeField,
     NumberOfSuccesFeesField,
-    CountOfCountriesField = 9,
-    CountriesFirstField
+    CountriesField = 9
 };
 
 void set_person(struct Person *person, char *surname, char *name, char *email);
@@ -95,7 +96,7 @@ void set_agency(struct Agency *agency, bool is_weakends, char *agency_name, size
 
 void set_legal_agency(struct LegalAgency *legal_agency, struct Agency main_info, enum LegalAgencyServicesTypes service_type, size_t number_of_succes_fees);
 
-void set_marriage_agency(struct MarriageAgency *marriage_agency, struct Agency main_info, enum MarriageAgencyServicesTypes service_type, enum MarriageAgencyCountryies *countries, size_t count_of_countries);
+void set_marriage_agency(struct MarriageAgency *marriage_agency, struct Agency main_info, enum MarriageAgencyServicesTypes service_type, size_t countries);
 
 void get_info_from_console(char *to, size_t max_to_length, char *message);
 
@@ -103,12 +104,28 @@ void read_agencies_text_file(char *to, size_t max_to_length);
 
 size_t split(char ***lexemes, char *string, char *delim);
 
-void set_agencies(struct LegalAgency ***legal_agencies, struct MarriageAgency ***marriage_agencies, char **agensies_info, size_t count_of_agencies);
+void set_agencies(struct LegalAgency **legal_agencies, struct MarriageAgency **marriage_agencies, char **agensies_info, size_t count_of_agencies, size_t * legal_and_marriage_number);
 
 size_t get_number_of_agencies_by_type(enum AgencyTypes agency_type, char **agenсies_info, size_t count_of_agencies);
 
-void set_indices_of_agency_from_agensies_info_by_type(enum AgencyTypes agency_type, size_t * indices, char **agenсies_info, size_t count_of_agencies);
+//void set_indices_of_agency_from_agensies_info_by_type(enum AgencyTypes agency_type, size_t * indices, char **agenсies_info, size_t count_of_agencies);
 
 size_t set_agency_info(char *** agency_info, char ** agencies_info, size_t agency_info_index);
+
+void print_legal_agency(struct LegalAgency * legal_agency, FILE * file);
+void print_marriage_agency(struct MarriageAgency * marriage_agency, FILE * file);
+
+void is_weekends_to_string(char **is_weekends_string, bool is_weekeds);
+void cities_to_string(char **city_string, enum Cities city);
+
+void legal_agency_service_type_to_string(char **service_type_string, enum LegalAgencyServicesTypes service_type);
+void marriage_agency_service_type_to_string(char ** service_type_string, enum MarriageAgencyServicesTypes service_type);
+void marriage_agency_countries_to_string(char ** countries_string, size_t countries);
+
+void filter_legal_agencies_by_city(struct LegalAgency * legal_agencies, size_t number_of_legal_agencies,  struct LegalAgency ** legal_agencies_in_city, enum Cities city, size_t * count_of_legal_agencies_in_city);
+void filter_marriage_agencies_by_city(struct MarriageAgency * marriage_agencies, size_t number_of_marriage_agencies, struct MarriageAgency ** marriage_agencies_in_city, enum Cities city, size_t * count_of_marriage_agencies_in_city);
+
+//void sort_legal_agencies_by_succes_fees(struct LegalAgency ** legal_agencies, size_t number_of_legal_agencies);
+void generate_agency_info_text(size_t id);
 
 #endif
