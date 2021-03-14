@@ -40,6 +40,7 @@ void get_info_from_console(char *to, size_t max_to_length, char *message)
 
 void read_agencies_text_file(char *to, size_t max_to_length)
 {
+    int max_to_length_check = (int)max_to_length;
     char *path_to_file = (char *)calloc(STRING_SIZE, sizeof(char));
 
     get_info_from_console(path_to_file, STRING_SIZE - 1, "Enter path to agencies text file");
@@ -56,8 +57,8 @@ void read_agencies_text_file(char *to, size_t max_to_length)
 
     while (fgets(buff, STRING_SIZE - 1, agencies_text_file) != NULL)
     {
-        max_to_length -= strlen(buff);
-        if (max_to_length < 0)
+        max_to_length_check -= strlen(buff);
+        if (max_to_length_check < 0)
         {
             puts("File text did not fit(read_agencies_text_file)");
             break;
@@ -79,12 +80,13 @@ size_t split(char ***lexemes, char *string, char *delim)
     strcpy(string_copy, string);
 
     size_t count_of_lexemes = 1;
-    for (size_t symbol_index = 0; symbol_index < strlen(string); symbol_index++)
+    size_t string_length = strlen(string);
+    for (size_t symbol_index = 0; symbol_index < string_length; symbol_index++)
     {
         char buff[2];
         buff[0] = string[symbol_index];
         buff[1] = '\0';
-        if (strcmp(buff, delim) == 0)
+        if (strcmp(buff, delim) == 0 && symbol_index != string_length - 1)
             count_of_lexemes++;
     }
 
@@ -121,12 +123,6 @@ void set_agencies(struct LegalAgency **legal_agencies, struct MarriageAgency **m
 
     *legal_agencies = (struct LegalAgency *)calloc(legal_agencies_number, sizeof(struct LegalAgency));
     *marriage_agencies = (struct MarriageAgency *)calloc(marriage_agencies_number, sizeof(struct MarriageAgency));
-
-    //size_t *legal_agency_indices = (size_t *)malloc(legal_agencies_number * sizeof(size_t));
-    //size_t *marriage_agency_indices = (size_t *)malloc(marriage_agencies_number * sizeof(size_t));
-
-    //set_indices_of_agency_from_agensies_info_by_type(Legal, legal_agency_indices, agensies_info, count_of_agencies);
-    //set_indices_of_agency_from_agensies_info_by_type(Marriage, marriage_agency_indices, agensies_info, count_of_agencies);
 
     const size_t agency_type_index = 7;
     size_t legal_agency_index = 0;
@@ -319,84 +315,10 @@ void marriage_agency_countries_to_string(char **countries_string, size_t countri
         strcat(*countries_string, "Romania");
 }
 
-void filter_legal_agencies_by_city(struct LegalAgency *legal_agencies, size_t number_of_legal_agencies, struct LegalAgency **legal_agencies_in_city, enum Cities city, size_t *count_of_legal_agencies_in_city)
+void generate_agency_info_text(size_t id, char * path_to_file)
 {
-    free(*legal_agencies_in_city);
-    *count_of_legal_agencies_in_city = 0;
-    for (size_t i = 0; i < number_of_legal_agencies; i++)
-    {
-        if ((legal_agencies + i)->main_info.city == city)
-        {
-            *count_of_legal_agencies_in_city += 1;
-        }
-    }
 
-    *legal_agencies_in_city = (struct LegalAgency *)calloc(*count_of_legal_agencies_in_city, sizeof(struct LegalAgency));
-    size_t legal_agency_in_city_index = 0;
-
-    for (size_t i = 0; i < number_of_legal_agencies; i++)
-    {
-        if ((legal_agencies + i)->main_info.city == city)
-        {
-            memcpy(*legal_agencies_in_city + legal_agency_in_city_index, (legal_agencies + i), sizeof(struct LegalAgency));
-            legal_agency_in_city_index++;
-        }
-    }
-}
-
-void filter_marriage_agencies_by_city(struct MarriageAgency *marriage_agencies, size_t number_of_marriage_agencies, struct MarriageAgency **marriage_agencies_in_city, enum Cities city, size_t *number_of_marriage_agencies_in_city)
-{
-    free(*marriage_agencies_in_city);
-    *number_of_marriage_agencies_in_city = 0;
-    for (size_t i = 0; i < number_of_marriage_agencies; i++)
-    {
-        if ((marriage_agencies + i)->main_info.city == city)
-        {
-            *number_of_marriage_agencies_in_city += 1;
-        }
-    }
-
-    *marriage_agencies_in_city = (struct MarriageAgency *)calloc(*number_of_marriage_agencies_in_city, sizeof(struct MarriageAgency));
-    size_t marriage_agency_in_city_index = 0;
-
-    for (size_t i = 0; i < number_of_marriage_agencies; i++)
-    {
-        if ((marriage_agencies + i)->main_info.city == city)
-        {
-            memcpy(*marriage_agencies_in_city + marriage_agency_in_city_index, (marriage_agencies + i), sizeof(struct MarriageAgency));
-            marriage_agency_in_city_index++;
-        }
-    }
-}
-
-// void sort_legal_agencies_by_succes_fees(struct LegalAgency ** legal_agencies, size_t number_of_legal_agencies)
-// {
-//     for (size_t i = 0; i < number_of_legal_agencies; i++)
-//     {
-//         for(size_t j = 0; j < number_of_legal_agencies-1; j++)
-//         {
-//             if ( ((*legal_agencies) + j)->number_of_success_fees > ((*legal_agencies) + (j + 1))->number_of_success_fees ) 
-//             {
-//                 struct LegalAgency buff;
-//                 memcpy(&buff, ((*legal_agencies) + j), sizeof(struct LegalAgency));
-//                 memcpy(((*legal_agencies) + j), (*legal_agencies) + (j + 1), sizeof(struct LegalAgency));
-//                 memcpy((*legal_agencies) + (j + 1), &buff, sizeof(struct LegalAgency));
-//             }
-//         }
-//     }
-// }
-
-void generate_agency_info_text(size_t id)
-{
-    char * path_to_file = (char *)calloc(STRING_SIZE, sizeof(char));
-
-    puts("Enter path to file:");
-
-    fgets(path_to_file, STRING_SIZE - 1, stdin);
-
-    path_to_file = strtok(path_to_file, "\n");
-
-    FILE * file = fopen(path_to_file, "w");
+    FILE * file = fopen(path_to_file, "a");
     if (file == NULL)
     {
         puts("File not available");
@@ -427,7 +349,7 @@ void generate_agency_info_text(size_t id)
     int city = rand() % NumberOfCities;
     int agency_type = rand() % 2;
     int service_type = rand() % NumberOfLegalAgencyServices;
-    int number_of_success_fees =  rand() % (N * 10 - N) + N;
+    int number_of_success_fees =  rand() % (N * 10 - N + 1) + N;
     int countries_bit_mask = rand() % MaxBitMaskOfCountries + 1;
 
     fprintf(file, "%s %s %s %d %s %d %d %d %d ", surname, name, email, is_weekends, agency_name, years_on_market, city, agency_type, service_type);
@@ -442,5 +364,27 @@ void generate_agency_info_text(size_t id)
     free(surname);
     free(buff);
     fclose(file);
-    free(path_to_file);
+    // free(path_to_file);
+}
+
+void write_legal_agency_binary(struct LegalAgency * legal_agency, FILE * bin_file)
+{
+    fwrite(legal_agency, sizeof(*legal_agency), 1, bin_file);
+}
+
+void write_marriage_agency_binary(struct MarriageAgency * marriage_agency, FILE * bin_file)
+{
+    fwrite(marriage_agency, sizeof(*marriage_agency), 1, bin_file);
+}
+
+void load_legal_agency_from_binary_by_index(struct LegalAgency * legal_agency, FILE * bin_file, size_t index)
+{
+    fseek(bin_file, (long)(sizeof(*legal_agency) * index), SEEK_SET);
+    fread(legal_agency, sizeof(*legal_agency), 1, bin_file);
+}
+
+void load_marriage_agency_from_binary_by_index(struct MarriageAgency * marriage_agency, FILE * bin_file, size_t index)
+{
+    fseek(bin_file, (long)(sizeof(*marriage_agency) * index), SEEK_SET);
+    fread(marriage_agency, sizeof(*marriage_agency), 1, bin_file);
 }

@@ -108,8 +108,6 @@ void set_agencies(struct LegalAgency **legal_agencies, struct MarriageAgency **m
 
 size_t get_number_of_agencies_by_type(enum AgencyTypes agency_type, char **agenсies_info, size_t count_of_agencies);
 
-//void set_indices_of_agency_from_agensies_info_by_type(enum AgencyTypes agency_type, size_t * indices, char **agenсies_info, size_t count_of_agencies);
-
 size_t set_agency_info(char *** agency_info, char ** agencies_info, size_t agency_info_index);
 
 void print_legal_agency(struct LegalAgency * legal_agency, FILE * file);
@@ -122,10 +120,11 @@ void legal_agency_service_type_to_string(char **service_type_string, enum LegalA
 void marriage_agency_service_type_to_string(char ** service_type_string, enum MarriageAgencyServicesTypes service_type);
 void marriage_agency_countries_to_string(char ** countries_string, size_t countries);
 
-void filter_legal_agencies_by_city(struct LegalAgency * legal_agencies, size_t number_of_legal_agencies,  struct LegalAgency ** legal_agencies_in_city, enum Cities city, size_t * count_of_legal_agencies_in_city);
-void filter_marriage_agencies_by_city(struct MarriageAgency * marriage_agencies, size_t number_of_marriage_agencies, struct MarriageAgency ** marriage_agencies_in_city, enum Cities city, size_t * count_of_marriage_agencies_in_city);
+void generate_agency_info_text(size_t id, char * path_to_file);
 
-//void sort_legal_agencies_by_succes_fees(struct LegalAgency ** legal_agencies, size_t number_of_legal_agencies);
-void generate_agency_info_text(size_t id);
+void write_legal_agency_binary(struct LegalAgency * legal_agency, FILE * file);
+void load_legal_agency_from_binary_by_index(struct LegalAgency * legal_agency, FILE * bin_file, size_t index);
+
+void write_marriage_agency_binary(struct MarriageAgency * marriage_agency, FILE * bin_file);
 
 #endif
