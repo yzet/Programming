@@ -1,8 +1,8 @@
 #include "../src/lib.h"
 
 bool test_set_agencies_from_text_file();
-bool asserts_legal_agencies(struct LegalAgency * expected, struct LegalAgency * actual, const char function_name[33]);
-bool asserts_marriage_agencies(struct MarriageAgency * expected, struct MarriageAgency * actual, const char function_name[33]);
+bool asserts_legal_agencies(struct LegalAgency *expected, struct LegalAgency *actual, const char function_name[33]);
+bool asserts_marriage_agencies(struct MarriageAgency *expected, struct MarriageAgency *actual, const char function_name[33]);
 
 bool test_set_agencies_from_text_file()
 {
@@ -10,16 +10,14 @@ bool test_set_agencies_from_text_file()
 
     struct LegalAgency expected_legal_agencies[2] = {
         {{true, "AGENCY_NAME1", 2, {"Surname0", "Name0", "Email0.gmail"}, Kyiv}, DefenseInCourt, 3},
-        {{true, "AGENCY_NAME2", 3, {"Surname1", "Name1", "Email1.gmail"}, London}, DefenseInCourt, 4}
-    };
+        {{true, "AGENCY_NAME2", 3, {"Surname1", "Name1", "Email1.gmail"}, London}, DefenseInCourt, 4}};
 
     struct MarriageAgency expected_marriage_agencies[2] = {
         {{true, "AGENCY_NAME3", 3, {"Surname2", "Name2", "Email2.gmail"}, London}, MailingOrganization, 3},
-        {{false, "AGENCY_NAME4", 1, {"Surname3", "Name3", "Email3.gmail"}, London}, MailingOrganization, 2}
-    };
+        {{false, "AGENCY_NAME4", 1, {"Surname3", "Name3", "Email3.gmail"}, London}, MailingOrganization, 2}};
 
-    struct LegalAgency * actual_legal_agencies = (struct LegalAgency *)calloc(0, sizeof(struct LegalAgency));
-    struct MarriageAgency * actual_marriage_agencies = (struct MarriageAgency *)calloc(0, sizeof(struct MarriageAgency));
+    struct LegalAgency *actual_legal_agencies = (struct LegalAgency *)calloc(0, sizeof(struct LegalAgency));
+    struct MarriageAgency *actual_marriage_agencies = (struct MarriageAgency *)calloc(0, sizeof(struct MarriageAgency));
 
     bool result = true;
 
@@ -32,28 +30,71 @@ bool test_set_agencies_from_text_file()
 
     for (size_t i = 0; i < 2; i++)
     {
-        result &= asserts_marriage_agencies(&expected_marriage_agencies[i], (actual_marriage_agencies+i), __FUNCTION__);
+        result &= asserts_marriage_agencies(&expected_marriage_agencies[i], (actual_marriage_agencies + i), __FUNCTION__);
     }
 
-    if (result) printf("%s", "Ok\n");
+    if (result)
+        printf("%s\n", "Ok");
 
     free(actual_legal_agencies);
     free(actual_marriage_agencies);
     return result;
 }
 
-bool asserts_legal_agencies(struct LegalAgency * expected, struct LegalAgency * actual, const char function_name[33])
+void test_legal_agency_from_binary_by_index()
+{
+    printf("Function: %s ", __FUNCTION__);
+
+    const size_t legal_agency_indices[2] = {1, 0};
+    struct LegalAgency expected_legal_agencies[2] = {
+        {{true, "AGENCY_NAME2", 3, {"Surname1", "Name1", "Email1.gmail"}, London}, DefenseInCourt, 4},
+        {{true, "AGENCY_NAME1", 2, {"Surname0", "Name0", "Email0.gmail"}, Kyiv}, DefenseInCourt, 3},
+    };
+
+    struct LegalAgency actual_legal_agecnies[2];
+
+    bool result = true;
+
+    char *path_to_file = "legal_agencies.bin";
+    FILE *file = fopen(path_to_file, "rb");
+
+    for (size_t i = 0; i < 2; i++)
+    {
+        load_legal_agency_from_binary_by_index(&(actual_legal_agecnies[i]), file, legal_agency_indices[i]);
+    }
+
+    for (size_t i = 0; i < 2; i++)
+    {
+        result &= asserts_legal_agencies(&(expected_legal_agencies[i]), &(actual_legal_agecnies[i]), __FUNCTION__);
+    }
+
+    if (result)
+        printf("%s\n", "Ok");
+
+    fclose(file);
+}
+
+bool asserts_legal_agencies(struct LegalAgency *expected, struct LegalAgency *actual, const char function_name[33])
 {
     bool result = true;
-    if ( strcmp(expected->main_info.director.surname, actual->main_info.director.surname) != 0 ) result = false;
-    if ( strcmp(expected->main_info.director.name, actual->main_info.director.name) != 0 ) result = false;
-    if ( strcmp(expected->main_info.director.email, actual->main_info.director.email) != 0 ) result = false;
-    if ( expected->main_info.is_weekends != actual->main_info.is_weekends ) result = false;
-    if ( strcmp( expected->main_info.name, actual->main_info.name ) != 0) result = false;
-    if ( expected->main_info.years_on_market != actual->main_info.years_on_market ) result = false;
-    if ( expected->main_info.city != actual->main_info.city ) result = false;
-    if ( expected->number_of_success_fees != actual->number_of_success_fees ) result = false;
-    if ( expected->service_type != actual->service_type) result = false;
+    if (strcmp(expected->main_info.director.surname, actual->main_info.director.surname) != 0)
+        result = false;
+    if (strcmp(expected->main_info.director.name, actual->main_info.director.name) != 0)
+        result = false;
+    if (strcmp(expected->main_info.director.email, actual->main_info.director.email) != 0)
+        result = false;
+    if (expected->main_info.is_weekends != actual->main_info.is_weekends)
+        result = false;
+    if (strcmp(expected->main_info.name, actual->main_info.name) != 0)
+        result = false;
+    if (expected->main_info.years_on_market != actual->main_info.years_on_market)
+        result = false;
+    if (expected->main_info.city != actual->main_info.city)
+        result = false;
+    if (expected->number_of_success_fees != actual->number_of_success_fees)
+        result = false;
+    if (expected->service_type != actual->service_type)
+        result = false;
 
     if (!result)
     {
@@ -66,19 +107,28 @@ bool asserts_legal_agencies(struct LegalAgency * expected, struct LegalAgency * 
     return result;
 }
 
-bool asserts_marriage_agencies(struct MarriageAgency * expected, struct MarriageAgency * actual, const char function_name[33])
+bool asserts_marriage_agencies(struct MarriageAgency *expected, struct MarriageAgency *actual, const char function_name[33])
 {
     bool result = true;
 
-    if ( strcmp(expected->main_info.director.surname, actual->main_info.director.surname) != 0 ) result = false;
-    if ( strcmp(expected->main_info.director.name, actual->main_info.director.name) != 0 ) result = false;
-    if ( strcmp(expected->main_info.director.email, actual->main_info.director.email) != 0 ) result = false;
-    if ( expected->main_info.is_weekends != actual->main_info.is_weekends ) result = false;
-    if ( strcmp( expected->main_info.name, actual->main_info.name ) != 0) result = false;
-    if ( expected->main_info.years_on_market != actual->main_info.years_on_market ) result = false;
-    if ( expected->main_info.city != actual->main_info.city ) result = false;
-    if ( expected->service_type != actual->service_type ) result = false;
-    if ( expected->countries != actual->countries ) result = false;
+    if (strcmp(expected->main_info.director.surname, actual->main_info.director.surname) != 0)
+        result = false;
+    if (strcmp(expected->main_info.director.name, actual->main_info.director.name) != 0)
+        result = false;
+    if (strcmp(expected->main_info.director.email, actual->main_info.director.email) != 0)
+        result = false;
+    if (expected->main_info.is_weekends != actual->main_info.is_weekends)
+        result = false;
+    if (strcmp(expected->main_info.name, actual->main_info.name) != 0)
+        result = false;
+    if (expected->main_info.years_on_market != actual->main_info.years_on_market)
+        result = false;
+    if (expected->main_info.city != actual->main_info.city)
+        result = false;
+    if (expected->service_type != actual->service_type)
+        result = false;
+    if (expected->countries != actual->countries)
+        result = false;
 
     if (!result)
     {
@@ -94,5 +144,6 @@ bool asserts_marriage_agencies(struct MarriageAgency * expected, struct Marriage
 int main()
 {
     test_set_agencies_from_text_file();
+    test_legal_agency_from_binary_by_index();
     return 0;
 }
