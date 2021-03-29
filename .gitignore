@@ -51,8 +51,10 @@ lab15/agencies.txt
 lab15/agencies1.txt
 lab15/generated_agencies.txt
 lab15/legal_agencies.bin
-lab15/marriage_agencies.txt
+lab15/agencies_output.txt
 lab15/dist/*
+lab15/*.txt
+lab15/agencies_output.bin
 
 lab17/agencies_input_exmple.txt
 lab17/agencies.txt
