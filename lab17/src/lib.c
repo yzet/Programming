@@ -17,20 +17,6 @@ void set_agency(struct Agency *agency, bool is_weakends, char *agency_name, size
     agency->city = city;
 }
 
-// void set_legal_agency(struct LegalAgency *legal_agency, struct Agency main_info, enum LegalAgencyServicesTypes service_type, size_t number_of_succes_fees)
-// {
-//     legal_agency->main_info = main_info;
-//     legal_agency->service_type = service_type;
-//     legal_agency->number_of_success_fees = number_of_succes_fees;
-// }
-
-// void set_marriage_agency(struct MarriageAgency *marriage_agency, struct Agency main_info, enum MarriageAgencyServicesTypes service_type, size_t countries)
-// {
-//     marriage_agency->main_info = main_info;
-//     marriage_agency->service_type = service_type;
-//     marriage_agency->countries = countries;
-// }
-
 void get_info_from_console(char *to, size_t max_to_length, char *message)
 {
     puts(message);
@@ -110,58 +96,6 @@ size_t split(char ***lexemes, char *string, char *delim)
     return count_of_lexemes;
 }
 
-// void set_agencies(struct LegalAgency **legal_agencies, struct MarriageAgency **marriage_agencies, char **agensies_info, size_t count_of_agencies, size_t *legal_and_marriage_number)
-// {
-//     size_t legal_agencies_number = get_number_of_agencies_by_type(Legal, agensies_info, count_of_agencies);
-//     size_t marriage_agencies_number = get_number_of_agencies_by_type(Marriage, agensies_info, count_of_agencies);
-
-//     *(legal_and_marriage_number) = legal_agencies_number;
-//     *(legal_and_marriage_number + 1) = marriage_agencies_number;
-
-//     free(*legal_agencies);
-//     free(*marriage_agencies);
-
-//     *legal_agencies = (struct LegalAgency *)calloc(legal_agencies_number, sizeof(struct LegalAgency));
-//     *marriage_agencies = (struct MarriageAgency *)calloc(marriage_agencies_number, sizeof(struct MarriageAgency));
-
-//     const size_t agency_type_index = 7;
-//     size_t legal_agency_index = 0;
-//     size_t marriage_agency_index = 0;
-//     for (size_t agency_index = 0; agency_index < count_of_agencies; agency_index++)
-//     {
-//         char **agency_info = (char **)calloc(0, sizeof(char *));
-//         size_t numbers_of_characteristics = set_agency_info(&agency_info, agensies_info, agency_index);
-//         struct Person director;
-//         set_person(&director, *(agency_info + SurnameField), *(agency_info + NameField), *(agency_info + EmailField));
-//         struct Agency agency;
-//         bool is_weekends = false;
-//         if (strtol(*(agency_info + IsWeekendsField), NULL, 10) == 1)
-//             is_weekends = true;
-//         set_agency(&agency, is_weekends, *(agency_info + AgencyNameField), (size_t)strtol(*(agency_info + YearsOnMarketField), NULL, 10), director, (unsigned int)strtol(*(agency_info + CityField), NULL, 10));
-
-//         if (strtol(*(agency_info + agency_type_index), NULL, 10) == Legal)
-//         {
-//             struct LegalAgency legal_agency;
-//             set_legal_agency(&legal_agency, agency, (unsigned int)strtol(*(agency_info + ServiceTypeField), NULL, 10), (size_t)strtol(*(agency_info + NumberOfSuccesFeesField), NULL, 10));
-//             memcpy((*legal_agencies) + legal_agency_index, &legal_agency, sizeof(struct LegalAgency));
-//             legal_agency_index++;
-//         }
-//         else if (strtol(*(agency_info + agency_type_index), NULL, 10) == Marriage)
-//         {
-//             struct MarriageAgency marriage_agency;
-//             set_marriage_agency(&marriage_agency, agency, (unsigned int)strtol(*(agency_info + ServiceTypeField), NULL, 10), (unsigned int)strtol(*(agency_info + CountriesField), NULL, 10));
-//             memcpy((*marriage_agencies) + marriage_agency_index, &marriage_agency, sizeof(struct MarriageAgency));
-//             marriage_agency_index++;
-//         }
-
-//         for (size_t i = 0; i < numbers_of_characteristics; i++)
-//         {
-//             free(*(agency_info + i));
-//         }
-//         free(agency_info);
-//     }
-// }
-
 void set_agencies(struct Agency **agencies, char **agencies_info, size_t count_of_agencies)
 {
     free(*agencies);
@@ -170,7 +104,7 @@ void set_agencies(struct Agency **agencies, char **agencies_info, size_t count_o
     for (size_t agency_index = 0; agency_index < count_of_agencies; agency_index++)
     {
         char **agency_info = (char **)calloc(0, sizeof(char *));
-        size_t number_of_charackteristics = set_agency_info(&agency_info, agencies_info, agency_index);
+        size_t number_of_characteristic = set_agency_info(&agency_info, agencies_info, agency_index);
         struct Person director;
         set_person(&director, *(agency_info + SurnameField), *(agency_info + NameField), *(agency_info + EmailField));
         bool is_weekends = false;
@@ -179,94 +113,39 @@ void set_agencies(struct Agency **agencies, char **agencies_info, size_t count_o
         struct Agency new_agency;
         set_agency(&new_agency, is_weekends, *(agency_info + AgencyNameField), (size_t)strtol(*(agency_info + YearsOnMarketField), NULL, 10), director, (unsigned int)strtol(*(agency_info + CityField), NULL, 10));
         memcpy((*agencies) + agency_index, &new_agency, sizeof(struct Agency));
+        for (size_t i = 0; i < number_of_characteristic; i++)
+        {
+            free(*(agency_info + i));
+        }
+        free(agency_info);
     }
 }
-
-// size_t get_number_of_agencies_by_type(enum AgencyTypes agency_type, char **agenсies_info, size_t count_of_agencies)
-// {
-//     //char ** agency_info = (char **)calloc(0, sizeof(char *));
-//     const size_t agency_type_index = 7;
-//     size_t number_of_agencies_by_type = 0;
-
-//     for (size_t agency_index = 0; agency_index < count_of_agencies; agency_index++)
-//     {
-//         char **agency_info = (char **)calloc(0, sizeof(char *));
-//         size_t count_of_fields = split(&agency_info, *(agenсies_info + agency_index), " ");
-//         if (strtol(*(agency_info + agency_type_index), NULL, 10) == agency_type)
-//         {
-//             number_of_agencies_by_type++;
-//         }
-//         for (size_t i = 0; i < count_of_fields; i++)
-//         {
-//             free(*(agency_info + i));
-//         }
-//         free(agency_info);
-//     }
-
-//     return number_of_agencies_by_type;
-// }
 
 size_t set_agency_info(char ***agency_info, char **agencies_info, size_t agency_info_index)
 {
     return split(agency_info, *(agencies_info + agency_info_index), ";");
 }
 
-// void print_legal_agency(struct LegalAgency *legal_agency, FILE *file)
-// {
-//     char *output = (char *)calloc(2 * STRING_SIZE, sizeof(char));
-
-//     char *is_weekends_string = (char *)calloc(STRING_SIZE, sizeof(char));
-//     is_weekends_to_string(&is_weekends_string, legal_agency->main_info.is_weekends);
-
-//     char *city_string = (char *)calloc(STRING_SIZE, sizeof(char));
-//     cities_to_string(&city_string, legal_agency->main_info.city);
-
-//     char *service_type_string = (char *)calloc(STRING_SIZE, sizeof(char));
-//     legal_agency_service_type_to_string(&service_type_string, legal_agency->service_type);
-
-//     sprintf(output, "Agency Name: %s\nAgency type: Legal agency\nDirector: %s %s Email: %s\nWeekends: %s\nYears on market: %d\nCity: %s\nService type: %s\nNumber of success fees: %d\n\n",
-//             legal_agency->main_info.name, legal_agency->main_info.director.name, legal_agency->main_info.director.surname, legal_agency->main_info.director.email,
-//             is_weekends_string, (int)legal_agency->main_info.years_on_market, city_string, service_type_string, (int)legal_agency->number_of_success_fees);
-
-//     fputs(output, file);
-
-//     free(is_weekends_string);
-//     free(city_string);
-//     free(service_type_string);
-//     free(output);
-// }
-
-// void print_marriage_agency(struct MarriageAgency *marriage_agency, FILE *file)
-// {
-//     char *output = (char *)calloc(2 * STRING_SIZE, sizeof(char));
-
-//     char *is_weekends_string = (char *)calloc(STRING_SIZE, sizeof(char));
-//     is_weekends_to_string(&is_weekends_string, marriage_agency->main_info.is_weekends);
-
-//     char *city_string = (char *)calloc(STRING_SIZE, sizeof(char));
-//     cities_to_string(&city_string, marriage_agency->main_info.city);
-
-//     char *service_type_string = (char *)calloc(STRING_SIZE, sizeof(char));
-//     marriage_agency_service_type_to_string(&service_type_string, marriage_agency->service_type);
-
-//     char *countries_string = (char *)calloc(STRING_SIZE, sizeof(char));
-//     marriage_agency_countries_to_string(&countries_string, marriage_agency->countries);
-
-//     sprintf(output, "Agency Name: %s\nAgency type: Marriage agency\nDirector: %s %s Email: %s\nWeekends: %s\nYears on market: %d\nCity: %s\nService type: %s\nCountries: %s\n\n",
-//             marriage_agency->main_info.name, marriage_agency->main_info.director.name, marriage_agency->main_info.director.surname, marriage_agency->main_info.director.email,
-//             is_weekends_string, (int)marriage_agency->main_info.years_on_market, city_string, service_type_string, countries_string);
-
-//     fputs(output, file);
-
-//     free(countries_string);
-//     free(service_type_string);
-//     free(city_string);
-//     free(is_weekends_string);
-//     free(output);
-// }
 
 void print_agency(struct Agency *agency, FILE *file)
 {
+    char *output = (char *)calloc(2 * STRING_SIZE, sizeof(char));
+
+    char *is_weekends_string = (char *)calloc(STRING_SIZE, sizeof(char));
+    is_weekends_to_string(&is_weekends_string, agency->is_weekends);
+
+    char *city_string = (char *)calloc(STRING_SIZE, sizeof(char));
+    cities_to_string(&city_string, agency->city);
+
+    sprintf(output, "Agency Name: %s\nDirector: %s %s Email: %s\nWeekends: %s\nYears on market: %d\nCity: %s\n",
+            agency->name, agency->director.name, agency->director.surname, agency->director.email,
+            is_weekends_string, (int)agency->years_on_market, city_string);
+
+    fputs(output, file);
+
+    free(is_weekends_string);
+    free(city_string);
+    free(output);
 }
 
 void is_weekends_to_string(char **is_weekends_string, bool is_weekeds)
@@ -299,45 +178,7 @@ void cities_to_string(char **city_string, enum Cities city)
     }
 }
 
-// void legal_agency_service_type_to_string(char **service_type_string, enum LegalAgencyServicesTypes service_type)
-// {
-//     switch (service_type)
-//     {
-//     case DivorceConsultation:
-//         strcpy(*service_type_string, "Divorce consultation");
-//         break;
-//     case DefenseInCourt:
-//         strcpy(*service_type_string, "Defense in court");
-//         break;
-//     default:
-//         break;
-//     }
-// }
 
-// void marriage_agency_service_type_to_string(char **service_type_string, enum MarriageAgencyServicesTypes service_type)
-// {
-//     switch (service_type)
-//     {
-//     case MailingOrganization:
-//         strcpy(*service_type_string, "Mailing organization");
-//         break;
-//     case DatingOrganization:
-//         strcpy(*service_type_string, "Dating organization");
-//         break;
-//     default:
-//         break;
-//     }
-// }
-
-// void marriage_agency_countries_to_string(char **countries_string, size_t countries)
-// {
-//     if ((countries & Ukraine) != 0)
-//         strcat(*countries_string, "Ukraine ");
-//     if ((countries & Poland) != 0)
-//         strcat(*countries_string, "Poland ");
-//     if ((countries & Romania) != 0)
-//         strcat(*countries_string, "Romania");
-// }
 
 void generate_agency_info_text(size_t id, char *path_to_file)
 {
@@ -371,16 +212,9 @@ void generate_agency_info_text(size_t id, char *path_to_file)
     int is_weekends = rand() % 2;
     int years_on_market = rand() % (N * 10 - N) + N;
     int city = rand() % NumberOfCities;
-    // int agency_type = rand() % 2;
-    // int service_type = rand() % NumberOfLegalAgencyServices;
-    // int number_of_success_fees =  rand() % (N * 10 - N + 1) + N;
-    // int countries_bit_mask = rand() % MaxBitMaskOfCountries + 1;
 
     fprintf(file, "%s;%s;%s;%d;%s;%d;%d", surname, name, email, is_weekends, agency_name, years_on_market, city);
-    // if (agency_type == 0)
-    //     fprintf(file, "%d", number_of_success_fees);
-    // else
-    //     fprintf(file, "%d", countries_bit_mask);
+  
 
     free(agency_name);
     free(email);
@@ -388,7 +222,6 @@ void generate_agency_info_text(size_t id, char *path_to_file)
     free(surname);
     free(buff);
     fclose(file);
-    // free(path_to_file);
 }
 
 void write_agency_binary(struct Agency *agency, FILE *file)
@@ -396,55 +229,79 @@ void write_agency_binary(struct Agency *agency, FILE *file)
     fwrite(agency, sizeof(*agency), 1, file);
 }
 
-void load_agency_binary_by_indexx(struct Agency *agency, FILE *file, size_t index)
+void load_agency_binary_by_index(struct Agency *agency, FILE *file, size_t index)
 {
     fseek(file, (long)(sizeof(*agency) * index), SEEK_SET);
     fread(agency, sizeof(*agency), 1, file);
 }
 
-// void write_legal_agency_binary(struct LegalAgency * legal_agency, FILE * bin_file)
-// {
-//     fwrite(legal_agency, sizeof(*legal_agency), 1, bin_file);
-// }
+void sort_agencies_by_options(struct Agency **agencies, size_t count_of_agencies, enum AgencySortingOptions agency_sorting_option)
+{
+    switch (agency_sorting_option)
+    {
+    case YearsOnMarketOption:
+        for (size_t i = 0; i < count_of_agencies; i++)
+        {
+            for (size_t j = 0; j < (count_of_agencies - 1); j++)
+            {
+                if ((*agencies + j)->years_on_market > ((*agencies + j + 1))->years_on_market)
+                {
+                    struct Agency buff;
+                    memcpy(&buff, (*agencies + j), sizeof(struct Agency));
+                    memcpy(*agencies + j, *agencies + j + 1, sizeof(struct Agency));
+                    memcpy(*agencies + j + 1, &buff, sizeof(struct Agency));
+                }
+            }
+        }
+        break;
+    case CityOption:
+        for (size_t i = 0; i < count_of_agencies; i++)
+        {
+            for (size_t j = 0; j < (count_of_agencies - 1); j++)
+            {
+                char *city_name_left = (char *)calloc(STRING_SIZE, sizeof(char));
+                cities_to_string(&city_name_left, (*agencies + j)->city);
+                char *city_name_right = (char *)calloc(STRING_SIZE, sizeof(char));
+                cities_to_string(&city_name_right, (*agencies + j + 1)->city);
+                if (strcmp(city_name_left, city_name_right) > 0)
+                {
+                    struct Agency buff;
+                    memcpy(&buff, (*agencies + j), sizeof(struct Agency));
+                    memcpy(*agencies + j, *agencies + j + 1, sizeof(struct Agency));
+                    memcpy(*agencies + j + 1, &buff, sizeof(struct Agency));
+                }
+                free(city_name_left);
+                free(city_name_right);
+            }
+        }
+        break;
+    default:
+        break;
+    }
+}
 
-// void write_marriage_agency_binary(struct MarriageAgency * marriage_agency, FILE * bin_file)
-// {
-//     fwrite(marriage_agency, sizeof(*marriage_agency), 1, bin_file);
-// }
+size_t get_agencies_from_kharkiv_with_3_or_more_years_on_market(struct Agency *agencies, struct Agency **geting_agencies, size_t count_of_agencies)
+{
+    free(*geting_agencies);
+    size_t geting_agencies_count = 0;
+    for (size_t i = 0; i < count_of_agencies; i++)
+    {
+        if ((agencies + i)->city == Kharkiv && (agencies + i)->years_on_market >= 3)
+        {
+            geting_agencies_count++;
+        }
+    }
 
-// void load_legal_agency_from_binary_by_index(struct LegalAgency * legal_agency, FILE * bin_file, size_t index)
-// {
-//     fseek(bin_file, (long)(sizeof(*legal_agency) * index), SEEK_SET);
-//     fread(legal_agency, sizeof(*legal_agency), 1, bin_file);
-// }
+    (*geting_agencies) = (struct Agency *)calloc(geting_agencies_count, sizeof(struct Agency));
+    size_t geting_agencies_last_index = 0;
 
-// void load_marriage_agency_from_binary_by_index(struct MarriageAgency * marriage_agency, FILE * bin_file, size_t index)
-// {
-//     fseek(bin_file, (long)(sizeof(*marriage_agency) * index), SEEK_SET);
-//     fread(marriage_agency, sizeof(*marriage_agency), 1, bin_file);
-// }
-
-// void set_agencies_from_text_file_full(struct LegalAgency **legal_agencies, struct MarriageAgency **marriage_agencies)
-// {
-//     char * agencies_info_text = (char *)calloc(STRING_SIZE, sizeof(char));
-//     read_agencies_text_file(agencies_info_text, STRING_SIZE - 1);
-
-//     char ** agencies_info = (char **)calloc(0, sizeof(char *));
-//     size_t count_of_agencies = split(&agencies_info, agencies_info_text, "\n");
-
-//     // struct LegalAgency * legal_agencies = (struct LegalAgency *)calloc(0, sizeof(struct LegalAgency));
-//     // struct MarriageAgency * marriage_agencies = (struct MarriageAgency *)calloc(0, sizeof(struct MarriageAgency));
-
-//     size_t * legal_marriage_count = (size_t *)malloc(2 * sizeof(size_t));
-//     set_agencies(legal_agencies, marriage_agencies, agencies_info, count_of_agencies, legal_marriage_count);
-
-//     free(agencies_info_text);
-//     for (size_t i = 0; i < count_of_agencies; i++)
-//     {
-//         free(*(agencies_info + i));
-//     }
-
-//     free(agencies_info);
-//     free(legal_marriage_count);
-
-// }
+    for (size_t i = 0; i < count_of_agencies; i++)
+    {
+        if ((agencies + i)->city == Kharkiv && (agencies + i)->years_on_market >= 3)
+        {
+            memcpy((*geting_agencies) + geting_agencies_last_index, (agencies + i), sizeof(struct Agency));
+            geting_agencies_last_index++;
+        }
+    }
+    return geting_agencies_count;
+}

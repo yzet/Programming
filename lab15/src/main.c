@@ -35,7 +35,7 @@ int main()
 
     // end print agencies array on screen
 
-    // write marriage agencies array to file
+    // write agencies array to file
 
     printf("%s\n", "Write agencies to text file");
     char * path_to_agencies_file = (char *)calloc(STRING_SIZE, sizeof(char));
@@ -52,7 +52,7 @@ int main()
     // end write marriage agencies array to file
 
     // start sorting by charackteristic
-    sort_agencies_by_options(&agencies, count_of_agencies, CityOption);
+    sort_agencies_by_options(&agencies, count_of_agencies, YearsOnMarketOption);
     for (size_t i = 0; i < count_of_agencies; i++)
     {
         print_agency(agencies + i, stdout);

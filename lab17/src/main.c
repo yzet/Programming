@@ -24,77 +24,95 @@ int main()
 
     // end read data from text file
 
-    // // print legal agencies array on screen
+    // print agencies array on screen
 
-    // printf("%s\n", "Print legal agencies from text file");
-    // for (size_t i = 0; i < *legal_marriage_count; i++)
-    // {
-    //     print_legal_agency(legal_agencies + i, stdout);
-    // }
-    // printf("%s\n", "Print legal agencies from text file complete");
+    printf("%s\n", "Print agencies from text file");
+    for (size_t i = 0; i < count_of_agencies; i++)
+    {
+        print_agency(agencies + i, stdout);
+    }
+    printf("%s\n", "Print agencies from text file complete");
 
-    // // end print legal agencies array on screen
+    // end print agencies array on screen
 
-    // // write marriage agencies array to file
+    // write marriage agencies array to file
 
-    // printf("%s\n", "Write marriage agencies to text file");
-    // char * path_to_marriage_agencies_file = (char *)calloc(STRING_SIZE, sizeof(char));
-    // get_info_from_console(path_to_marriage_agencies_file, STRING_SIZE - 1, "Enter path to file for marriage agencies:");
-    // FILE * marriage_agencies_file = fopen(path_to_marriage_agencies_file, "w");
-    // for (size_t i = 0; i < *(legal_marriage_count + 1); i++)
-    // {
-    //     print_marriage_agency((marriage_agencies + i), marriage_agencies_file);
-    // }
-    // free(path_to_marriage_agencies_file);
-    // fclose(marriage_agencies_file);
-    // printf("%s\n", "Write marriage agencies to text file complete");
+    printf("%s\n", "Write agencies to text file");
+    char * path_to_agencies_file = (char *)calloc(STRING_SIZE, sizeof(char));
+    get_info_from_console(path_to_agencies_file, STRING_SIZE - 1, "Enter path to file for agencies:");
+    FILE * agencies_file = fopen(path_to_agencies_file, "w");
+    for (size_t i = 0; i < count_of_agencies; i++)
+    {
+        print_agency((agencies + i), agencies_file);
+    }
+    free(path_to_agencies_file);
+    fclose(agencies_file);
+    printf("%s\n", "Write agencies to text file complete");
 
-    // // end write marriage agencies array to file
+    // end write marriage agencies array to file
 
-    // // generate agencies
+    // start sorting by charackteristic
+    sort_agencies_by_options(&agencies, count_of_agencies, CityOption);
+    for (size_t i = 0; i < count_of_agencies; i++)
+    {
+        print_agency(agencies + i, stdout);
+    }
+    // end sorting by charackteristic
 
-    // printf("%s\n", "Generate agencies");
-    // char * path_to_generate_agencies_file = "generated_agencies.txt"; 
-    // for (size_t i = 0; i < N; i++)
-    // {
-    //     generate_agency_info_text(i, path_to_generate_agencies_file);
-    //     if (i < N - 1)
-    //     {
-    //         FILE * generate_agencies_file = fopen(path_to_generate_agencies_file, "a");
-    //         fputs("\n", generate_agencies_file);
-    //         fclose(generate_agencies_file);
-    //     }
-    // }
-    // printf("%s\n", "Generate agencies complete");
+    // start get agencies in kharkov with 3+ years
+    struct Agency * geting_agencies = (struct Agency *)calloc(0, sizeof(struct Agency));
+    size_t count_of_geting = get_agencies_from_kharkiv_with_3_or_more_years_on_market(agencies, &geting_agencies, count_of_agencies);;
+    for (size_t i = 0; i < count_of_geting; i++)
+    {
+        print_agency(geting_agencies + i, stdout);
+    }
 
-    // // end generate agencies
+    // end get agencies in kharkov with 3+ years
 
-    // // write legal agencies binary
+    // generate agencies
 
-    // printf("%s\n", "Write legal agencies binary");
-    // char * path_to_bin_file = "legal_agencies.bin";
-    // FILE * bin_file = fopen(path_to_bin_file, "wb");
-    // for (size_t i = 0; i < *legal_marriage_count; i++)
-    // {
-    //     write_legal_agency_binary((legal_agencies + i), bin_file);
-    // }
-    // fclose(bin_file);
-    // printf("%s\n", "Write legal agencies binary complete");
-    // // end write legal agencies binary
+    printf("%s\n", "Generate agencies");
+    char * path_to_generate_agencies_file = "generated_agencies.txt"; 
+    for (size_t i = 0; i < N; i++)
+    {
+        generate_agency_info_text(i, path_to_generate_agencies_file);
+        if (i < N - 1)
+        {
+            FILE * generate_agencies_file = fopen(path_to_generate_agencies_file, "a");
+            fputs("\n", generate_agencies_file);
+            fclose(generate_agencies_file);
+        }
+    }
+    printf("%s\n", "Generate agencies complete");
 
-    // // read legal agencies from binary file and read by index
+    // end generate agencies
 
-    // printf("%s\n", "Read legal agencies binary");
-    // bin_file = fopen(path_to_bin_file, "rb");
-    // struct LegalAgency * legal_agencies_from_binary = (struct LegalAgency *)calloc(*legal_marriage_count, sizeof(struct LegalAgency));
-    // for (size_t i = 0; i < *legal_marriage_count; i++)
-    // {
-    //     load_legal_agency_from_binary_by_index((legal_agencies_from_binary + i), bin_file, i);
-    // }
-    // fclose(bin_file);
-    // printf("%s\n", "Read legal agencies binary complete");
+    // start write agencies binary
 
-    // // end read legal agencies from binary file and read by index
+    printf("%s\n", "Write agencies binary");
+    char * path_to_bin_file = "agencies_output.bin";
+    FILE * bin_file = fopen(path_to_bin_file, "wb");
+    for (size_t i = 0; i < count_of_agencies; i++)
+    {
+        write_agency_binary((agencies + i), bin_file);
+    }
+    fclose(bin_file);
+    printf("%s\n", "Write agencies binary complete");
+    // end write agencies binary
+
+    // read legal agencies from binary file and read by index
+
+    printf("%s\n", "Read agencies binary");
+    bin_file = fopen(path_to_bin_file, "rb");
+    struct Agency * agencies_from_binary = (struct Agency *)calloc(count_of_agencies, sizeof(struct Agency));
+    for (size_t i = 0; i < count_of_agencies; i++)
+    {
+        load_agency_binary_by_index((agencies_from_binary + i), bin_file, i);
+    }
+    fclose(bin_file);
+    printf("%s\n", "Read agencies binary complete");
+
+    // end read legal agencies from binary file and read by index
 
     free(agencies_info_text);
 
@@ -109,5 +127,7 @@ int main()
     // free(marriage_agencies);
     // free(legal_agencies_from_binary);
     free(agencies);
+    free(agencies_from_binary);
+    free(geting_agencies);
     return 0;
 }
