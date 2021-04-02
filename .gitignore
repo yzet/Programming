@@ -66,5 +66,9 @@ lab17/dist/*
 
 lab18/dist/*
 
+# lab19/*
+lab19/data_files/*
+lab19/dist/*
+
 
 *Zone.Identifier
