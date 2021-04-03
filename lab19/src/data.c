@@ -3,9 +3,6 @@
 
 void set_person(struct Person *person, char *surname, char *name, char *email)
 {
-    // strcpy(person->surname, surname);
-    // strcpy(person->name, name);
-    // strcpy(person->email, email);
     person->surname = surname;
     person->name = name;
     person->email = email;
@@ -16,7 +13,6 @@ void set_agency(struct Agency *agency, bool is_weakends, char *agency_name, size
 {
     agency->is_weekends = is_weakends;
     agency->name = agency_name;
-    // strcpy(agency->name, agency_name);
     agency->years_on_market = years_on_market;
     agency->director = agency_director;
     agency->city = city;
@@ -82,13 +78,15 @@ int agencies_cmp_by_years_on_market(struct Agency *agency1, struct Agency *agenc
     return result;
 }
 
-void read_agencies_text_file(char *to, size_t max_to_length)
+void read_agencies_text_file(char *to, size_t max_to_length, char *path_to_file_with_data)
 {
     int max_to_length_check = (int)max_to_length;
     char *path_to_file = (char *)calloc(STRING_SIZE, sizeof(char));
 
-    // get_info_from_console(path_to_file, STRING_SIZE - 1, "Enter path to agencies text file");
-    strcpy(path_to_file, "./data_files/agencies.txt");
+
+    // strcpy(path_to_file, "./data_files/agencies.txt");
+    strcpy(path_to_file, path_to_file_with_data);
+
 
     FILE *agencies_text_file = fopen(path_to_file, "r");
     if (agencies_text_file == NULL)
@@ -97,24 +95,8 @@ void read_agencies_text_file(char *to, size_t max_to_length)
         exit(1);
     }
 
-    // char *buff = (char *)calloc(1, sizeof(char));
     char buff;
 
-
-
-    // while (fgets(buff, STRING_SIZE - 1, agencies_text_file) != NULL)
-    // {
-    //     max_to_length_check -= strlen(buff);
-    //     if (max_to_length_check < 0)
-    //     {
-    //         puts("File text did not fit(read_agencies_text_file)");
-    //         break;
-    //     }
-    //     else
-    //     {
-    //         strcat(to, buff);
-    //     }
-    // }
     size_t last_index_in_to = 0;
     while (fscanf(agencies_text_file, "%c", &buff) != EOF)
     {

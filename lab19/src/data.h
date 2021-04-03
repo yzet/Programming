@@ -55,7 +55,7 @@ void cities_to_string(char **city_string, enum Cities city);
 void write_agency_data(struct Agency *agency, FILE * file);
 
 int agencies_cmp_by_years_on_market(struct Agency *agency1, struct Agency *agency2);
-void read_agencies_text_file(char *to, size_t max_to_length);
+void read_agencies_text_file(char *to, size_t max_to_length, char *path_to_file_with_data);
 size_t split(char ***lexemes, char *string, char *delim);
 size_t set_agency_info(char ***agency_info, char **agencies_info, size_t agency_info_index);
 

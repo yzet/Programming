@@ -46,9 +46,8 @@ void start()
                 FILE *input_file = fopen(path_to_file, "r");
                 if (input_file != NULL)
                 {
-                    // print_agencies_list_to_file(agencies_list, output_file);
                     char *text = (char *)calloc(STRING_SIZE, sizeof(char));
-                    read_agencies_text_file(text, STRING_SIZE - 1);
+                    read_agencies_text_file(text, STRING_SIZE - 1, path_to_file);
                     char **agencies_text = (char **)(calloc(0, sizeof(char *)));
                     size_t count_of_agencies = split(&agencies_text, text, "\n");
                     set_agencies_list_from_text_array(&agencies_list, agencies_text, count_of_agencies);
