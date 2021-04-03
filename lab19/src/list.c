@@ -293,6 +293,7 @@ void print_agencies_list_on_screen(struct AgenciesList *agencies_list)
     {
         print_agency(&current->data, stdout);
         current = current->next;
+        printf("\n");
     }
 }
 
