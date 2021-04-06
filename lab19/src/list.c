@@ -33,6 +33,8 @@ int add_element_to_list_by_index(struct AgenciesList *agencies_list, struct Agen
         agencies_list->head->data.director.name = agency_director_name;
         agencies_list->head->data.director.surname = agency_director_surname;
         agencies_list->head->data.director.email = agency_director_email;
+
+        agencies_list->tail = agencies_list->head;
         return 0;
     }
 
@@ -94,8 +96,11 @@ int add_element_to_list_by_index(struct AgenciesList *agencies_list, struct Agen
     new_object->next = current->next;
     if (new_object->next != NULL)
         new_object->next->prev = new_object;
+    else
+        agencies_list->tail = new_object;
     new_object->prev = current;
     current->next = new_object;
+
     return 0;
 }
 
@@ -139,6 +144,8 @@ int add_element_to_list_end(struct AgenciesList *agencies_list, struct Agency *e
 
     current->next = new_object;
     new_object->prev = current;
+
+    agencies_list->tail = new_object;
 
     return 0;
 }
@@ -295,6 +302,18 @@ void print_agencies_list_on_screen(struct AgenciesList *agencies_list)
         current = current->next;
         printf("\n");
     }
+}
+
+void print_agencies_list_on_screen_reverse(struct AgenciesList *agencies_list)
+{
+     struct AgenciesListElement *current = agencies_list->tail;
+     while (current != NULL)
+     {
+        print_agency(&current->data, stdout);
+        current = current->prev;
+        printf("\n");
+     }
+     
 }
 
 void print_agencies_list_to_file(struct AgenciesList *agencies_list, FILE *file)

@@ -30,13 +30,13 @@ void test_insert_string()
     init_dynamic_array(&actual, sizeof(char));
     void *inserted_data = (void *)"hello";
     insert(&actual, inserted_data, strlen((char *)inserted_data), 0);
-    void *inserted_data1 = (void *)"hel";
-    insert(&actual, inserted_data, strlen((char *)inserted_data1), 3);
+    void *inserted_data1 = (void *)"abc";
+    insert(&actual, inserted_data1, strlen((char *)inserted_data1), 3);
 
     struct DynamicArray expected;
     expected.length = 8;
     expected.size_of_elements = 1;
-    expected.array = (void *)"helhello";
+    expected.array = (void *)"helabclo";
 
     result = assert_dynamic_array_chars(&expected, &actual, __FUNCTION__);
 

@@ -39,7 +39,10 @@ void start()
                 break;
             case 2:
                 print_list_on_screen_menu();
+                
                 print_agencies_list_on_screen(&agencies_list);
+                printf("%s\n", "Reverse:");
+                print_agencies_list_on_screen_reverse(&agencies_list);
                 break;
             case 3:
                 print_read_list_from_file_menu(path_to_file);

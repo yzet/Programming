@@ -16,10 +16,10 @@ void insert(struct DynamicArray *dynamic_array, void *inserted_data, size_t coun
 {
     size_t new_length = dynamic_array->length + count_of_elements;
     void *new_array = (void *)malloc(new_length * dynamic_array->size_of_elements);
-    for (size_t i = 0; i < new_length; i++)
-    {
-        memset((new_array + i), '\0', dynamic_array->size_of_elements);
-    }
+    // for (size_t i = 0; i < new_length; i++)
+    // {
+        memset((new_array), '\0', dynamic_array->size_of_elements * new_length);
+    // }
     if (from_index > dynamic_array->length)
         from_index = dynamic_array->length;
 
