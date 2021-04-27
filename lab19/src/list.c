@@ -134,6 +134,7 @@ int add_element_to_list_end(struct AgenciesList *agencies_list, struct Agency *e
     {
         new_object->prev = NULL;
         agencies_list->head = new_object;
+        agencies_list->tail = new_object;
         return 0;
     }
 

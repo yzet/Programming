@@ -21,8 +21,6 @@ touch:
 create_bins: main.bin test.bin
 main.bin: src/main.c
 	$(CC) $(C_OPTS) $< -o ./dist/$@
-	# $(CC) $(C_OPTS) -o ./dist/$@
 
 test.bin: test/test.c
 	$(CC) $(C_OPTS) $< -o ./dist/$@
-	# $(CC) $(C_OPTS) -o ./dist/$@

@@ -70,5 +70,12 @@ lab18/dist/*
 lab19/data_files/*
 lab19/dist/*
 
+lab20/.vscode/*
+lab20/dist/*
+
+lab21/.vscode/*
+lab21/dist/*
+lab21/shared/*
+
 
 *Zone.Identifier
