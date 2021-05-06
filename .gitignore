@@ -77,5 +77,10 @@ lab21/.vscode/*
 lab21/dist/*
 lab21/shared/*
 
+lab22/*
+
+lab23/dist
 
 *Zone.Identifier
+*.vscode
+*.idea

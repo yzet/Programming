@@ -18,7 +18,7 @@ compile: create_bins
 touch:
 	doxygen Doxyfile
 
-create_bins: main.bin test.bin
+create_bins: main.bin #test.bin
 main.bin: src/main.c
 	$(CC) $(C_OPTS) $< -o ./dist/$@
 
