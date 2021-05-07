@@ -1,7 +1,5 @@
-#include "agency.hpp"
+#include "agency.h"
 #include <iostream>
-
-// TODO: rename file from hpp to h
 
 Agency::Agency() {
     is_weekends = false;
@@ -11,6 +9,10 @@ Agency::Agency() {
     director.surname = "Surname";
     director.email = "email@email";
     city = Kharkiv;
+
+#ifdef DEBUG
+    std::cout << "Default constructor called for Agency" << std::endl;
+#endif
 }
 
 //Agency::Agency(const Agency &copy) {
@@ -20,7 +22,11 @@ Agency::Agency() {
 //    director = copy.director;
 //    city = copy.city;
 //}
-//Agency::Agency(const Agency &copy) = default;
+#ifdef DEBUG
+Agency::Agency(const Agency &copy) {
+    std::cout << "Copy constructor called for Agency" << std::endl;
+}
+#endif
 
 Agency::Agency(bool is_weekends_value, std::string name_value, int years_on_market_value, person_t director_value, Cities city_value) {
     is_weekends = is_weekends_value;
@@ -28,9 +34,21 @@ Agency::Agency(bool is_weekends_value, std::string name_value, int years_on_mark
     years_on_market = years_on_market_value;
     director = std::move(director_value);
     city = city_value;
+
+#ifdef DEBUG
+    std::cout << "Constructor with parameters called for Agency" << std::endl;
+#endif
 }
 
+
+#ifdef DEBUG
+Agency::~Agency() {
+    std::cout << "Destructor called for Agency with name '" << name << '\'' << std::endl;
+}
+#else
 Agency::~Agency() = default;
+#endif
+
 
 bool Agency::GetIsWeekends() const {
     return is_weekends;

@@ -1,5 +1,5 @@
-#include "agencies_dynamic_array.hpp"
-#include "agency.hpp"
+#include "agencies_dynamic_array.h"
+#include "agency.h"
 
 bool CheckOnKharkiv(Agency &agency)
 {
@@ -17,9 +17,9 @@ int main() {
 
     Agency agency(false, "FName", 1, {"FNa", "FSur", "Femail"}, Kiyv);
     dynamic_array.AddAgency(agency);
-    agency.SetCity(London);
+    agency.SetName("SName");
     dynamic_array.AddAgency(agency);
-    agency.SetCity(Kharkiv);
+    agency.SetName("TName");
     agency.SetYearsOnMarket(3);
     dynamic_array.AddAgency(agency);
 //    dynamic_array.ShowAll();

@@ -11,7 +11,10 @@ prep:
 
 compile: create_bins
 
-create_bins: main.bin
+create_bins: main.bin test.bin
 
 main.bin: src/main.cpp
-	$(CC) $(C_OPTS) -I./src src/agency.cpp src/agencies_dynamic_array.cpp $< -o ./dist/$@
+	$(CC) $(C_OPTS) -DDEBUG -I./src src/agency.cpp src/agencies_dynamic_array.cpp $< -o ./dist/$@
+
+test.bin: test/test.cpp
+	$(CC) $(C_OPTS) -DDEBUG -I./src src/agency.cpp src/agencies_dynamic_array.cpp $< -o ./dist/$@

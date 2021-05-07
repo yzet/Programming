@@ -29,9 +29,9 @@ private:
 
 public:
     Agency();
-
-//    Agency(const Agency &copy);
-
+#ifdef DEBUG
+    Agency(const Agency &copy);
+#endif
     Agency(bool is_weekends_value, std::string name_value, int years_on_market_value, person_t director_value, Cities city_value);
 
     ~Agency();
