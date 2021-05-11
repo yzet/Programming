@@ -88,6 +88,10 @@ lab24/src/ui.cpp
 lab24/src/agencies_dynamic_array.cpp
 lab24/src/agencies_dynamic_array.h
 
+lab25/dist/*
+lab25/data/*
+
+
 *Zone.Identifier
 *.vscode
 *.idea

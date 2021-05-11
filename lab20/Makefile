@@ -2,7 +2,7 @@
 #CC = gcc
 #C_OPTS = -std=gnu11 -g -Wall -Wextra -Wformat-security -Wfloat-equal -Wshadow -Wconversion -Wlogical-not-parentheses -Wnull-dereference -I./src
 CC = clang
-C_OPTS = -fsanitize=address -g -DDEBUG -Wall -Wextra -Wformat-security -Wfloat-equal -Wshadow -Wconversion -Wlogical-not-parentheses -Wnull-dereference -I./src src/data.c src/list.c src/ui.c src/time_calculate.c
+C_OPTS = -fsanitize=address -DDEBUG -g -Wall -Wextra -Wformat-security -Wfloat-equal -Wshadow -Wconversion -Wlogical-not-parentheses -Wnull-dereference -I./src src/data.c src/list.c src/ui.c src/time_calculate.c
 
 
 all: clean prep compile
@@ -23,4 +23,4 @@ main.bin: src/main.c
 	$(CC) $(C_OPTS) $< -o ./dist/$@
 
 test.bin: test/test.c
-	$(CC) $(C_OPTS) $< -o ./dist/$@
+	$(CC)  $(C_OPTS) $< -o ./dist/$@
