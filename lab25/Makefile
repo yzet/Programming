@@ -17,4 +17,4 @@ main.bin: src/main.cpp
 	$(CC) $(C_OPTS) -I./src src/agency.cpp src/agencies_list.cpp $< -o ./dist/$@
 
 test.bin: test/test.cpp
-	$(CC) $(C_OPTS) /usr/src/gtest/src/gtest_main.cc /usr/src/gtest/src/gtest-all.cc -I /usr/include -I /usr/src/gtest -L /usr/local/lib -lpthread -I/src src/agency.cpp src/agencies_list.cpp $< -o ./dist/$@
+	$(CC) $(C_OPTS) /usr/src/gtest/src/gtest-all.cc  -I /usr/src/gtest -lpthread -I/src src/agency.cpp src/agencies_list.cpp $< -o ./dist/$@

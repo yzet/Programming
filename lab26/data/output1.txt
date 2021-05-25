@@ -1,0 +1,22 @@
+Agency{
+-Name:Name Name,
+-Weekends:Yes,
+-Director:{
+--Name:DirName,
+--Surname:DirSurname,
+--Email:DirEmail
+-}
+-Years on market:3,
+-City:Kyiv
+}
+Agency{
+-Name:Name Name,
+-Weekends:Yes,
+-Director:{
+--Name:DirName,
+--Surname:DirSurname,
+--Email:DirEmail
+-}
+-Years on market:3,
+-City:London
+}
