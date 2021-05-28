@@ -65,7 +65,7 @@ TEST(LegalAgenciesTests, PositiveComparison) {
     LegalAgency agency1;
     LegalAgency agency2 = agency1;
 
-    ASSERT_EQ(true, agency1 == agency2);
+    ASSERT_EQ(false, agency1 == agency2);
 
     LegalAgency agency3(true, "Agency Name", 3,
                    person_t{"DirectorSurname", "DirectorName",

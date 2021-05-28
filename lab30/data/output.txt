@@ -1,0 +1,36 @@
+Agency{
+-Name:FName,
+-Weekends:No,
+-Director:{
+--Name:FNa,
+--Surname:FSur,
+--Email:Femail
+-}
+-Years on market:1,
+-City:Kyiv
+}
+
+Agency{
+-Name:SName,
+-Weekends:No,
+-Director:{
+--Name:FNa,
+--Surname:FSur,
+--Email:Femail
+-}
+-Years on market:1,
+-City:Kharkiv
+}
+
+Agency{
+-Name:TName,
+-Weekends:No,
+-Director:{
+--Name:FNa,
+--Surname:FSur,
+--Email:Femail
+-}
+-Years on market:1,
+-City:London
+}
+
