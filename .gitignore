@@ -91,6 +91,11 @@ lab24/src/agencies_dynamic_array.h
 lab25/dist/*
 lab25/data/*
 
+lab26/dist/*
+
+lab27/dist/*
+
+lab30/*
 
 *Zone.Identifier
 *.vscode
