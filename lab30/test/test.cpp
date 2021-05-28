@@ -1,4 +1,4 @@
-#include "../src/virtual_agencies_list.h"
+#include "../src/agencies_vector.h"
 #include <iostream>
 #include <string>
 #include <gtest/gtest.h>
@@ -8,20 +8,30 @@ using std::cout;
 using std::endl;
 using std::string;
 
-int comparator_by_years_on_market(const Agency &left, const Agency &right) {
-    int result = 1;
-    if (left.GetYearsOnMarket() < right.GetYearsOnMarket()) {
-        result = -1;
-    } else if (left.GetYearsOnMarket() == right.GetYearsOnMarket()) {
-        result = 0;
-    }
+bool comparator_by_years_on_market(const Agency *left, const Agency *right) {
 
-    return result;
+    if (left->GetYearsOnMarket() > right->GetYearsOnMarket()) {
+        return false;
+    }
+    return true;
 }
 
-TEST(AgenciesTests, AgenciesListSorting) {
+bool checkOnKharkiv(const Agency *agency) {
+    if (agency->GetCity() == Kharkiv)
+        return true;
+    return false;
+}
 
-    AgenciesList actual;
+bool AgenciesThatWorkInKharkivAndHaveThreeOrMoreYearsOnMarket(const Agency *agency) {
+    if (agency->GetCity() == Kharkiv && agency->GetYearsOnMarket() >= 3) {
+        return true;
+    }
+    return false;
+}
+
+TEST(AgenciesTests, AgenciesVectorSorting) {
+
+    AgenciesVector actual;
 
     Agency * agency1 = new LegalAgency();
     actual.AddElementBack(*agency1);
@@ -35,7 +45,7 @@ TEST(AgenciesTests, AgenciesListSorting) {
     actual.AddElementBack(*agency1);
 //    cout << actual;
 
-    AgenciesList expected;
+    AgenciesVector expected;
     agency1->SetYearsOnMarket(0);
     expected.AddElementBack(*agency1);
     agency1->SetYearsOnMarket(2);
@@ -54,6 +64,98 @@ TEST(AgenciesTests, AgenciesListSorting) {
     delete agency1;
     actual.Clear();
     expected.Clear();
+}
+
+TEST(AgenciesTests, AgenciesVectorSelecting) {
+    AgenciesVector data;
+
+    Agency * agency1 = new LegalAgency();
+    data.AddElementBack(*agency1);
+
+    agency1->SetYearsOnMarket(2);
+    agency1->SetCity(Kiyv);
+    data.AddElementBack(*agency1);
+
+    agency1->SetYearsOnMarket(6);
+    agency1->SetCity(London);
+    data.AddElementBack(*agency1);
+
+    agency1->SetYearsOnMarket(7);
+    agency1->SetCity(Kharkiv);
+    data.AddElementBack(*agency1);
+
+    agency1->SetYearsOnMarket(12);
+    data.AddElementBack(*agency1);
+
+    AgenciesVector expected;
+    agency1->SetYearsOnMarket(0);
+    expected.AddElementBack(*agency1);
+    agency1->SetYearsOnMarket(7);
+    expected.AddElementBack(*agency1);
+    agency1->SetYearsOnMarket(12);
+    expected.AddElementBack(*agency1);
+
+//    cout << expected;
+    AgenciesVector * actual = data.GetElementsBy(checkOnKharkiv);
+
+    ASSERT_EQ(*actual, expected);
+
+    delete actual;
+    expected.Clear();
+    delete agency1;
+}
+
+TEST(AgenciesTests, AgenciesVectorKharkivAndThreeOrMoreYears) {
+    AgenciesVector data;
+
+    Agency * agency1 = new LegalAgency();
+    Agency * agency2 = new MarriageAgency();
+    data.AddElementBack(*agency1);
+
+    agency1->SetYearsOnMarket(4);
+    agency1->SetCity(Kiyv);
+    data.AddElementBack(*agency1);
+
+    agency1->SetYearsOnMarket(6);
+    agency1->SetCity(London);
+    data.AddElementBack(*agency1);
+
+    agency1->SetYearsOnMarket(7);
+    agency1->SetCity(Kharkiv);
+    data.AddElementBack(*agency1);
+
+    agency2->SetYearsOnMarket(4);
+    agency2->SetCity(Kharkiv);
+    data.AddElementBack(*agency2);
+
+    agency2->SetYearsOnMarket(2);
+    agency2->SetCity(Kharkiv);
+    data.AddElementBack(*agency2);
+
+    agency2->SetYearsOnMarket(7);
+    agency2->SetCity(Kharkiv);
+    data.AddElementBack(*agency2);
+
+    AgenciesVector expected;
+    agency1->SetCity(Kharkiv);
+    agency2->SetCity(Kharkiv);
+    agency1->SetYearsOnMarket(7);
+    expected.AddElementBack(*agency1);
+    agency2->SetYearsOnMarket(4);
+    expected.AddElementBack(*agency2);
+    agency2->SetYearsOnMarket(7);
+    expected.AddElementBack(*agency2);
+
+//    cout << expected;
+    AgenciesVector * actual = data.GetElementsBy(AgenciesThatWorkInKharkivAndHaveThreeOrMoreYearsOnMarket);
+
+    ASSERT_EQ(*actual, expected);
+
+    delete actual;
+    expected.Clear();
+    delete agency1;
+    delete agency2;
+
 }
 
 //int main(int argc, char **argv) {
