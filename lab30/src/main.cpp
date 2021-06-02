@@ -5,6 +5,7 @@
 #include "marriage_agency.h"
 #include "agencies_vector.h"
 #include "agency_creator.h"
+#include <fstream>
 
 using std::cout;
 using std::endl;
@@ -14,8 +15,6 @@ using std::ifstream;
 
 
 int main() {
-
-    AgenciesVector agenciesVector;
 
 
     return 0;

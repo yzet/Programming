@@ -40,22 +40,38 @@ Agency *AgencyCreator::FromString(std::string agency_string) {
     size_t key_index = 0;
     size_t next_delimiter_index = 0;
 
-    std::string keys[10] = {
-            "Type",
-            "Name",
-            "Weekends",
-            "Name",
-            "Surname",
-            "Email",
-            "Years on market",
-            "City",
-            "Service",
-            "0"
-    };
+//    std::string keys[10] = {
+//            "Type",
+//            "Name",
+//            "Weekends",
+//            "Name",
+//            "Surname",
+//            "Email",
+//            "Years on market",
+//            "City",
+//            "Service",
+//            "0"
+//    };
+
+    std::vector<string> keys(10);
+    keys[0] = "Type";
+    keys[1] = "Name";
+    keys[2] = "Weekends";
+    keys[3] = "Name";
+    keys[4] = "Surname";
+    keys[5] = "Email";
+    keys[6] = "Years on market";
+    keys[7] = "City";
+    keys[8] = "Service";
 
     size_t keys_length = 10;
 
     result_agency = GenerateAgencyFromType(agency_string);
+    if (result_agency->GetType() == 'L') {
+        keys[9] = "Number of cases won";
+    } else {
+        keys[9] = "Countries";
+    }
     for (size_t i = 1; i < keys_length; i++) {
         key_index = agency_string.find(keys[i], key_index);
         next_delimiter_index = std::min(agency_string.find(',', key_index),
@@ -114,9 +130,9 @@ void AgencyCreator::ValueToAgencyByIndex(Agency **agency, int32_t index, const s
             if ((*agency)->GetType() == 'L') {
                 std::stringstream ss;
                 ss << value;
-                int numberOfCasesWon = 0;
+                int numberOfCasesWon;
                 ss >> numberOfCasesWon;
-                ((LegalAgency *) agency)->SetNumberOfCasesWon(numberOfCasesWon);
+                ((LegalAgency *) *agency)->SetNumberOfCasesWon(numberOfCasesWon); // TODO: if delete * from *agency we have not error?
             } else if ((*agency)->GetType() == 'M') {
                 ((MarriageAgency *) agency)->SetCountries(((MarriageAgency *) agency)->CountriesFromString(value));
             }

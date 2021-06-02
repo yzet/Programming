@@ -10,10 +10,19 @@
 #include "marriage_agency.h"
 #include <vector>
 #include <algorithm>
+#include <fstream>
+#include "agency_creator.h"
 
 using std::vector;
 using std::sort;
 using std::cout;
+using std::endl;
+using std::cerr;
+using std::ifstream;
+using std::ofstream;
+using std::istream;
+using std::ostream;
+
 
 class AgenciesVector {
 private:
@@ -59,14 +68,16 @@ public:
     bool operator==(const AgenciesVector &agenciesList) const;
 
     //TODO input/output
-//    friend ostream& operator<<(ostream& output, const AgenciesList& agencies_list);
-//    friend istream& operator>>(istream& input, AgenciesList& agencies_list);
-//
-//    friend ofstream& operator<<(ofstream& output, const AgenciesList& agencies_list);
-//    friend ifstream& operator>>(ifstream& input, AgenciesList& agencies_list);
+    friend ostream& operator<<(ostream& output, const AgenciesVector& agencies_list);
+    friend istream& operator>>(istream& input, AgenciesVector& agencies_list);
+
+    friend ofstream& operator<<(ofstream& output, const AgenciesVector& agencies_list);
+    friend ifstream& operator>>(ifstream& input, AgenciesVector& agencies_list);
 //    AgenciesListElement *GetAgenciesListElementWithIndex(size_t index);
 
     AgenciesVector  *GetElementsBy(bool (*check_function)(const Agency *)) const;
+
+    void StringOfAgenciesToList(const string &agencies_string);
 };
 
 

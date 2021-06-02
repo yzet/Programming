@@ -102,35 +102,27 @@ void Agency::getAgencyFromConsole(std::istream &input, Agency &agency) const {
     int agency_years_on_market;
     int agency_city;
 
-//    std::cout << "Enter in this order: " << std::endl
-//              << "1)Name\n2)Weekends\n3)DirectorSurname\n4)DirectorName\n5)DirectorEmail\n6)YearsOnMarket\n7)City"
-//              << std::endl;
 
     std::cout << "Agency {" << std::endl;
 
     std::cout << "-Type:";
     input >> agency_type;
-//    std::cout << "," << std::endl;
 
     std::cout << "-Name:";
     std::cin.ignore(1, '\n');
     std::getline(input, agency_name, '\n');
-//    std::cout << "," << std::endl;
 
     // regex
     std::cout << "-Weekends:";
     input >> agency_is_weekends; // boolean to Yes or No
     std::cin.ignore(1, '\n');
-//    std::cout << "," << std::endl;
 
     std::cout << "Director:{" << std::endl;
     std::cout << "--Name:";
     std::getline(input, agency_director.name, '\n');
-//    std::cout << "," << std::endl;
 
     std::cout << "--Surname:";
     std::getline(input, agency_director.surname, '\n');
-//    std::cout << "," << std::endl;
 
     std::cout << "--Email:";
     std::getline(input, agency_director.email, '\n');
@@ -138,20 +130,10 @@ void Agency::getAgencyFromConsole(std::istream &input, Agency &agency) const {
 
     std::cout << "-Years on market:";
     input >> agency_years_on_market;
-//    std::cout << "," << std::endl;
 
     std::cout << "-City:";
     input >> agency_city;
-//    std::cout << std::endl << "}" << std::endl;
 
-//    std::stringstream agency_ss;
-//    agency_ss << "Agency{\n" << "-Type:" << agency_type << "," << std::endl << "-Name:" << agency_name << "," << std::endl <<
-//              "-Weekends:" << (agency_is_weekends ? "Yes" : "No") << "," << std::endl <<
-//              "-Director:{" << std::endl << "--Name:" << agency_director.name << "," << std::endl <<
-//              "--Surname:" << agency_director.surname << "," << std::endl <<
-//              "--Email:" << agency_director.email << std::endl << "-}" << std::endl <<
-//              "-Years on market:" << agency_years_on_market << "," << std::endl <<
-//              "-City:" << CityToString((Cities)agency_city) << std::endl << "}" << std::endl;
 
     agency.name = agency_name;
     agency.is_weekends = agency_is_weekends;

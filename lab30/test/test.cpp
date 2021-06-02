@@ -158,6 +158,49 @@ TEST(AgenciesTests, AgenciesVectorKharkivAndThreeOrMoreYears) {
 
 }
 
+TEST(AgenciesTests, AgenciesVectorIfstremTest) {
+    AgenciesVector expected;
+
+    Agency * agency1 = new LegalAgency();
+    Agency * agency2 = new MarriageAgency();
+
+    expected.AddElementBack(*agency1);
+
+    agency1->SetYearsOnMarket(4);
+    agency1->SetCity(Kiyv);
+    expected.AddElementBack(*agency1);
+
+    agency1->SetYearsOnMarket(6);
+    agency1->SetCity(London);
+    expected.AddElementBack(*agency1);
+
+    agency1->SetYearsOnMarket(7);
+    agency1->SetCity(Kharkiv);
+    expected.AddElementBack(*agency1);
+
+    agency2->SetYearsOnMarket(4);
+    agency2->SetCity(Kharkiv);
+    expected.AddElementBack(*agency2);
+
+    agency2->SetYearsOnMarket(2);
+    agency2->SetCity(Kharkiv);
+    expected.AddElementBack(*agency2);
+
+    agency2->SetYearsOnMarket(7);
+    agency2->SetCity(Kharkiv);
+    expected.AddElementBack(*agency2);
+
+    AgenciesVector actual;
+
+    ifstream agenciesInputFile("../data/output.txt");
+    agenciesInputFile >> actual;
+
+    ASSERT_EQ(actual, expected);
+
+    delete agency1;
+    delete agency2;
+}
+
 //int main(int argc, char **argv) {
 //    testing::InitGoogleTest(&argc, argv);
 //    return RUN_ALL_TESTS();

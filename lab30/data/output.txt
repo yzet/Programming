@@ -1,36 +1,98 @@
 Agency{
--Name:FName,
+-Type:L,
+-Name:Name,
 -Weekends:No,
 -Director:{
---Name:FNa,
---Surname:FSur,
---Email:Femail
+--Name:Name,
+--Surname:Surname,
+--Email:email@email
 -}
--Years on market:1,
--City:Kyiv
+-Years on market:0,
+-City:Kharkiv,
+-Service:Divorce Consultation,
+-Number of cases won:0
 }
-
 Agency{
--Name:SName,
+-Type:L,
+-Name:Name,
 -Weekends:No,
 -Director:{
---Name:FNa,
---Surname:FSur,
---Email:Femail
+--Name:Name,
+--Surname:Surname,
+--Email:email@email
 -}
--Years on market:1,
--City:Kharkiv
+-Years on market:4,
+-City:Kyiv,
+-Service:Divorce Consultation,
+-Number of cases won:0
 }
-
 Agency{
--Name:TName,
+-Type:L,
+-Name:Name,
 -Weekends:No,
 -Director:{
---Name:FNa,
---Surname:FSur,
---Email:Femail
+--Name:Name,
+--Surname:Surname,
+--Email:email@email
 -}
--Years on market:1,
--City:London
+-Years on market:6,
+-City:London,
+-Service:Divorce Consultation,
+-Number of cases won:0
 }
-
+Agency{
+-Type:L,
+-Name:Name,
+-Weekends:No,
+-Director:{
+--Name:Name,
+--Surname:Surname,
+--Email:email@email
+-}
+-Years on market:7,
+-City:Kharkiv,
+-Service:Divorce Consultation,
+-Number of cases won:0
+}
+Agency{
+-Type:M,
+-Name:Name,
+-Weekends:No,
+-Director:{
+--Name:Name,
+--Surname:Surname,
+--Email:email@email
+-}
+-Years on market:4,
+-City:Kharkiv,
+-Service:Organization of correspondence,
+-Countries:Ukraine
+}
+Agency{
+-Type:M,
+-Name:Name,
+-Weekends:No,
+-Director:{
+--Name:Name,
+--Surname:Surname,
+--Email:email@email
+-}
+-Years on market:2,
+-City:Kharkiv,
+-Service:Organization of correspondence,
+-Countries:Ukraine
+}
+Agency{
+-Type:M,
+-Name:Name,
+-Weekends:No,
+-Director:{
+--Name:Name,
+--Surname:Surname,
+--Email:email@email
+-}
+-Years on market:7,
+-City:Kharkiv,
+-Service:Organization of correspondence,
+-Countries:Ukraine
+}

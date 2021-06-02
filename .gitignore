@@ -77,7 +77,8 @@ lab21/.vscode/*
 lab21/dist/*
 lab21/shared/*
 
-lab22/*
+lab22/dist/*
+lab22/.vscode/*
 
 lab23/dist
 

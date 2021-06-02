@@ -8,12 +8,13 @@
 #include "agency.h"
 #include "legal_agency.h"
 #include "marriage_agency.h"
+#include <vector>
 
 class AgencyCreator {
 public:
     static Agency *FromString(std::string agency_string);
 
-    static void ValueToAgencyByIndex(Agency **agency, int32_t index, const std::string &value); // TODO: not work
+    static void ValueToAgencyByIndex(Agency **agency, int32_t index, const std::string &value);
 
     static Agency *GenerateAgencyFromType(std::string agencyString);
 };
