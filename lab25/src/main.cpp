@@ -46,6 +46,7 @@ int main() {
 
     file >> agencies_list;
 
-    agencies_list.ShowAll();
+//    agencies_list.ShowAll();
+    cout << agencies_list;
     return 0;
 }

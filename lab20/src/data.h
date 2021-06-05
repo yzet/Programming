@@ -1,6 +1,16 @@
 #ifndef __AGENCIES_DATA__
 #define __AGENCIES_DATA__
 
+/**
+ * @file data.h
+ * @brief Файл з описом структури агенств, перерахуванням міст та функцій
+ * оперування агенствами
+ *
+ * @author Zhuravlev Y.
+ * @date 29-may-2021
+ * @version 1.0
+ */
+
 #define STRING_SIZE 256
 
 #include "stdio.h"
@@ -36,6 +46,7 @@ struct Agency
     enum Cities city;
 };
 
+
 enum AgencyInfoFields
 {
     SurnameField,
@@ -46,6 +57,7 @@ enum AgencyInfoFields
     YearsOnMarketField,
     CityField,
 };
+
 
 void set_person(struct Person *person, char *surname, char *name, char *email);
 void set_agency(struct Agency *agency, bool is_weakends, char *agency_name, size_t years_on_market, struct Person agency_director, enum Cities city);
