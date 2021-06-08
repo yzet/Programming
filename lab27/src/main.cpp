@@ -15,9 +15,9 @@ using std::ifstream;
 
 int main() {
 
-    Agency * marriageAgency1 = new MarriageAgency();
-    cin >> *marriageAgency1;
-    cout << *marriageAgency1;
+//    Agency * marriageAgency1 = new MarriageAgency();
+//    cin >> *marriageAgency1;
+//    cout << *marriageAgency1;
 //    Agency * marriageAgency = new MarriageAgency();
 //
 //    legalAgency->SetYearsOnMarket(10);
