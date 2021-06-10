@@ -74,7 +74,7 @@ LegalAgency() : Agency(), legalAgencyService(LegalAgencyService::divorceConsulta
 
 Крок 1 (див. рис. 1). Результат роботи виведення юридичного агенства. 
 
-![]() 
+![](https://github.com/yzet/Programming/blob/main/lab26/doc/assets/legal_agency.jpg) 
 
 Рисунок 1 — результат виведення юридичного агенства.
 
