@@ -51,7 +51,7 @@ _Опис роботи_: за допомогою переданої функці
 
 _Повертає функція:_ динамічний масив агенств.
 
-![]()  
+![](https://github.com/yzet/Programming/blob/main/lab23/doc/assets/get_agencies_by.png)  
   
 Рисунок 1 — Схема алгоритму функції *GetAgenciesBy*
 ##### Метод `RemoveAgency`
@@ -125,13 +125,13 @@ void AgenciesDynamicArray::ShowAll() const{
 
 Крок 1 (див. рис. 2). Демонструється робота програми.
 
-![]() 
+![](https://github.com/yzet/Programming/blob/main/lab23/doc/assets/demonstration.jpg) 
 
 Рисунок 4 — результат роботи функцій втавлення та видалення.
 
 Крок 2 (див. рис. 3). Демонструється відсутність витоків пам'яті.
 
-![]() 
+![](https://github.com/yzet/Programming/blob/main/lab23/doc/assets/leaks.jpg) 
 
 ## Висновки
 
