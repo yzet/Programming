@@ -152,6 +152,7 @@ Agency Agency::FromString(std::string agency_string) { // TODO: test this
 Крок 2 (див. рис. 3). Результат роботи методу перетворення строки в об'єкт.
 
 ![](https://github.com/yzet/Programming/blob/main/lab24/doc/assets/FromString.jpg) 
+
 Рисунок 3 — результат роботи метода FromString.
 
 ## Висновки
