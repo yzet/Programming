@@ -42,7 +42,7 @@ _Опис роботи_: викликає метод getAgencyFromConsol із Ag
 
 _Повертає функція:_.
 
-![]()  
+![](https://github.com/yzet/Programming/blob/main/lab27/doc/assets/lab27.png)  
   
 Рисунок 1 — Схема алгоритму *LegalAgency::getAgencyFromConsole*
 
@@ -100,7 +100,7 @@ Agency::getAgencyFromConsole(input, agency);
 
 Крок 1 (див. рис. 2). Результат вводу шлюбного агенства. 
 
-![]() 
+![](https://github.com/yzet/Programming/blob/main/lab27/doc/assets/cin_marriage.jpg) 
 
 Рисунок 2 — результат вводу MarriageAgency.
 
