@@ -48,7 +48,7 @@ _Опис роботи_: за допомогою регулярного вира
 
 _Повертає функція:_ true якщо текст пройшов.
 
-![]()  
+![](https://github.com/yzet/Programming/blob/main/lab22/doc/assets/lab22.png)  
   
 Рисунок 1 — Схема алгоритму функції *is_std_regex*
 ##### Функція перевірки на два або більше слів
@@ -62,9 +62,9 @@ _Опис роботи_: за допомогою регулярного вира
 
 _Повертає функція:_ true якщо у строці два або більше слів.
 
-![]() 
+![](https://github.com/yzet/Programming/blob/main/lab22/doc/assets/lab22_1.png) 
 
-Рисунок 2 — Схема алгоритму функції *reduce*
+Рисунок 2 — Схема алгоритму функції *is_two_or_more_words*
 
 ##### _**Основна функція**_
 
@@ -136,13 +136,13 @@ return bool_result;
 
 Крок 1 (див. рис. 4). Демонструється введеня коректних даних.
 
-![]() 
+![](https://github.com/yzet/Programming/blob/main/lab22/doc/assets/cor_data.jpg) 
 
 Рисунок 4 — результат роботи функцій втавлення та видалення.
 
 Крок 2 (див. рис. 5). Демонструється введеня некоректних даних.
 
-![]() 
+![](https://github.com/yzet/Programming/blob/main/lab22/doc/assets/error_data.jpg) 
 
 ## Висновки
 
