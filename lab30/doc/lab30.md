@@ -91,7 +91,7 @@ return selected;
 
 Крок 1 (див. рис. 1). Результат роботи тестів. 
 
-![]() 
+![](https://github.com/yzet/Programming/blob/main/lab30/doc/assets/tests.jpg) 
 
 Рисунок 1 — результат роботи тестів.
 
