@@ -46,7 +46,7 @@ _Опис роботи_: порівнює усі поля агенств.
 
 _Повертає функція:_ true або false.
 
-![]()  
+![](https://github.com/yzet/Programming/blob/main/lab25/doc/assets/lab25.png)  
   
 Рисунок 1 — Схема алгоритму jоператора *==*
 ##### Перевантаження `std::ostream &operator<<`
@@ -100,7 +100,7 @@ ifstream &operator>>(ifstream &input, AgenciesList &agencies_list) {
 
 Крок 1 (див. рис. 2). Результат роботи перевантаженного оператора зчитування з файлу та виводу агенств у консоль за допомогою перевантаженого оператору виведення у консоль. 
 
-![]() 
+![](https://github.com/yzet/Programming/blob/main/lab25/doc/assets/cout.jpg) 
 
 Рисунок 2 — результат роботи методів ifstream >> та cout <<.
 
