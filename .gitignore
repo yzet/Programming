@@ -98,6 +98,9 @@ lab27/dist/*
 
 lab30/dist/*
 
+lab28/dist/*
+lab28/data/*
+
 *Zone.Identifier
 *.vscode
 *.idea
